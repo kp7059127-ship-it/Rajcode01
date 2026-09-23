@@ -22,6 +22,10 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
 </style>
 </head>
 <body>
+  <div style="background:#ffcc00;color:#000;white-space:nowrap;overflow:hidden;padding:6px 0;font-size:12px;font-weight:bold;position:sticky;top:0;z-index:99">
+  <span style="display:inline-block;animation:scroll 25s linear infinite;padding-left:100%" id="ticker">🔥 Aman ne ₹50 jeeta • Khushi ne ₹100 jeeta • Raj ne ₹20 jeeta • Refer karke ₹10 kamao • Daily Bonus Live •</span>
+</div>
+<style>@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}</style>
 <div class="box">
 <div class="top">
 <div class="logo" style="display:flex;align-items:center;gap:8px"><div style="height:38px;width:38px;border-radius:50%;border:2px solid #ffcc00;background:linear-gradient(135deg,#ffcc00,#ff9900);display:flex;align-items:center;justify-content:center;font-size:20px">👑</div> <span style="color:#ffcc00;font-weight:bold;font-size:20px">RAJCODE</span></div>
@@ -35,6 +39,9 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
 </div>
 <div class="card">
 <h3 style="color:#ffcc00">🎯 Play & Win</h3>
+  <div id="coin" style="width:85px;height:85px;margin:10px auto;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ffd700,#b8860b);display:flex;align-items:center;justify-content:center;font-size:38px;transition:transform 1s;box-shadow:0 0 25px rgba(255,204,0,0.5)">🪙</div>
+<p id="resultText" style="text-align:center;color:#ffcc00;font-weight:bold;height:18px;font-size:13px"></p>
+<audio id="coinSound" src="https://assets.mixkit.co/sfx/preview/mixkit-coin-win-notification-1992.mp3"></audio>
 <p style="color:#aaa;font-size:13px;margin:8px 0">Select karo, jeeto bada!</p>
 <button class="btn" onclick="playGame()">PLAY NOW - ₹10</button>
 </div>
@@ -89,7 +96,20 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
 let bal=parseInt(localStorage.getItem('wallet')||'1000');
 document.getElementById('walletBalance').innerText=bal;
 function openDeposit(){document.getElementById('depositModal').style.display='flex';}
-function playGame(){if(bal<10){alert('Paisa Add karo');openDeposit();return;}bal-=10;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;let win=Math.random()>0.5;if(win){bal+=18;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;alert('🎉 Jeet gaye! ₹18 mila');}else{alert('😢 Haar gaye');}}
+function playGame(){
+if(bal<10){alert('Paisa Add karo');openDeposit();return;}
+document.getElementById('coin').style.transform='rotateY(720deg) translateY(-30px)';
+try{document.getElementById('coinSound').play();}catch(e){}
+document.getElementById('resultText').innerText='Tossing...';
+setTimeout(()=>{
+bal-=10;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;
+let win=Math.random()>0.5;
+document.getElementById('coin').style.transform='rotateY(0deg)';
+document.getElementById('coin').innerText=win?'👑':'🪙';
+document.getElementById('resultText').innerText=win?'🎉 YOU WON ₹18!':'😢 LOST - Try Again';
+if(win){bal+=18;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;}
+},900);
+}
 function submitDeposit(){const a=document.getElementById('depAmount').value;const u=document.getElementById('depUtr').value;const f=document.getElementById('depScreenshot');if(!a||!u){alert('Amount aur UTR bharo');return;}if(f.files[0]){const r=new FileReader();r.onload=function(e){saveDep(a,u,e.target.result)};r.readAsDataURL(f.files[0]);}else{saveDep(a,u,'');}}
 function saveDep(amount,utr,ss){let d=JSON.parse(localStorage.getItem('raj_deposits')||'[]');d.push({amount,utr,screenshot:ss,user:localStorage.getItem('username')||'Guest',time:new Date().toLocaleString(),status:'pending'});localStorage.setItem('raj_deposits',JSON.stringify(d));alert('✅ Request Sent!');document.getElementById('depositModal').style.display='none';}
 function showTeam(){
