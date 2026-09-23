@@ -29,7 +29,7 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
 <div class="tabs">
 <div class="tab on">🎮 GAME</div>
 <div class="tab" onclick="openDeposit()">💰 ADD</div>
-<div class="tab">👥 REFER</div>
+<div class="tab" onclick="showTeam()">👥 REFER</div>
 <div class="tab">💸 OUT</div>
 </div>
 <div class="card">
@@ -38,6 +38,30 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
 <button class="btn" onclick="playGame()">PLAY NOW - ₹10</button>
 </div>
 </div>
+  <!-- TEAM SECTION START - Naya Add Kiya -->
+<div id="teamSection" style="display:none; padding:15px">
+  <h2 style="color:#ffcc00; margin:10px 0">👥 My Team</h2>
+  
+  <div style="background:#1a2332; padding:15px; border-radius:12px; display:flex; justify-content:space-between; text-align:center">
+    <div><small style="color:#aaa">Total Team</small><br><b style="color:#ffcc00; font-size:18px">0</b></div>
+    <div><small style="color:#aaa">Today Income</small><br><b style="color:#00ff88; font-size:18px">₹0</b></div>
+    <div><small style="color:#aaa">Total Income</small><br><b style="color:#00ff88; font-size:18px">₹0</b></div>
+  </div>
+
+  <div style="background:#1a2332; margin-top:15px; padding:15px; border-radius:12px">
+    <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #2a3441"><span>Level 1 Team</span><span style="color:#ffcc00">0 Members</span></div>
+    <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #2a3441"><span>Level 2 Team</span><span style="color:#ffcc00">0 Members</span></div>
+    <div style="display:flex; justify-content:space-between; padding:8px 0"><span>Level 3 Team</span><span style="color:#ffcc00">0 Members</span></div>
+  </div>
+
+  <div style="background:#1a2332; margin-top:15px; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center">
+    <div><small style="color:#aaa">Refer Link</small><br><b style="font-size:12px">rajcode01.vercel.app?ref=RAJ123</b></div>
+    <button onclick="alert('Link Copied!')" style="background:#ffcc00; border:none; padding:8px 12px; border-radius:6px; font-weight:bold">COPY</button>
+  </div>
+
+  <button onclick="window.open('https://wa.me/?text=Join RAJCODE01 https://rajcode01.vercel.app/?ref=RAJ123')" style="background:#25D366; color:#fff; border:none; width:100%; padding:12px; border-radius:10px; font-weight:bold; margin-top:10px">SHARE ON WHATSAPP</button>
+</div>
+<!-- TEAM SECTION END -->
 
 <div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:10000;justify-content:center;align-items:center;padding:15px">
 <div style="background:#1e2a35;padding:20px;border-radius:18px;width:100%;max-width:360px;text-align:center;border:1px solid #ffcc00">
@@ -52,6 +76,7 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
 <button onclick="document.getElementById('depositModal').style.display='none'" style="width:100%;padding:11px;background:#2a3a4a;color:#fff;border:none;border-radius:10px;margin-top:8px">Cancel</button>
 </div>
 </div>
+  
 
 <script>
 let bal=parseInt(localStorage.getItem('wallet')||'1000');
@@ -60,6 +85,18 @@ function openDeposit(){document.getElementById('depositModal').style.display='fl
 function playGame(){if(bal<10){alert('Paisa Add karo');openDeposit();return;}bal-=10;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;let win=Math.random()>0.5;if(win){bal+=18;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;alert('🎉 Jeet gaye! ₹18 mila');}else{alert('😢 Haar gaye');}}
 function submitDeposit(){const a=document.getElementById('depAmount').value;const u=document.getElementById('depUtr').value;const f=document.getElementById('depScreenshot');if(!a||!u){alert('Amount aur UTR bharo');return;}if(f.files[0]){const r=new FileReader();r.onload=function(e){saveDep(a,u,e.target.result)};r.readAsDataURL(f.files[0]);}else{saveDep(a,u,'');}}
 function saveDep(amount,utr,ss){let d=JSON.parse(localStorage.getItem('raj_deposits')||'[]');d.push({amount,utr,screenshot:ss,user:localStorage.getItem('username')||'Guest',time:new Date().toLocaleString(),status:'pending'});localStorage.setItem('raj_deposits',JSON.stringify(d));alert('✅ Request Sent!');document.getElementById('depositModal').style.display='none';}
+function showTeam(){
+  document.querySelector('.card').style.display='none';
+  document.getElementById('teamSection').style.display='block';
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  event.target.classList.add('on');
+}
+function showGame(){
+  document.querySelector('.card').style.display='block';
+  document.getElementById('teamSection').style.display='none';
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  event.target.classList.add('on');
+}
 </script>
 </body>
 </html>
