@@ -2,259 +2,64 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAJCODE - FINAL</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0a0e13;color:#fff;display:flex;justify-content:center}
-.box{width:100%;max-width:440px;background:#12181f;min-height:100vh;padding-bottom:80px}
-.top{display:flex;justify-content:space-between;padding:12px;background:#1a232e;position:sticky;top:0;z-index:10;align-items:center}
-.wal{background:#ffcc00;color:#000;padding:6px 14px;border-radius:20px;font-weight:800}
-.tabs{display:flex;gap:5px;background:#1a232e;margin:10px;border-radius:12px;padding:5px;overflow-x:auto}
-.tab{flex:1;min-width:55px;padding:9px 6px;text-align:center;border-radius:8px;font-weight:800;color:#8a9bb0;font-size:10px}
+body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:10px;min-height:100vh}
+.box{width:100%;max-width:440px;background:#111a22;border-radius:20px;padding:15px;border:1px solid #222}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.logo{color:#ffcc00;font-weight:bold;font-size:22px}
+.wal{background:#ffcc00;color:#000;padding:7px 14px;border-radius:20px;font-weight:bold;display:flex;align-items:center;gap:8px}
+.wal button{background:#000;color:#ffcc00;border:none;padding:5px 12px;border-radius:15px;font-weight:bold}
+.tabs{display:flex;gap:5px;background:#000;padding:5px;border-radius:12px;margin:10px 0}
+.tab{flex:1;min-width:55px;padding:9px 5px;text-align:center;background:#1c2731;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer}
 .tab.on{background:#ffcc00;color:#000}
-.coin{width:100px;height:100px;margin:15px auto;border-radius:50%;background:gold;display:flex;align-items:center;justify-content:center;font-size:50px;color:#000;font-weight:900}
-.dice{width:100px;height:100px;margin:15px auto;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:60px}
-.choice{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 12px;margin-top:8px}
-.c{padding:11px;background:#1c2734;border:2px solid #243041;border-radius:11px;text-align:center;font-weight:800;font-size:12px}
-.c.on{border-color:#ffcc00;color:#ffcc00;background:#ffcc0015}
-.bets{display:flex;gap:5px;padding:10px 12px}
-.b{flex:1;background:#1c2734;padding:9px;border-radius:10px;text-align:center;border:1px solid #243041;font-size:12px}
-.b.on{background:#ffcc00;color:#000;font-weight:800}
-.play{margin:10px 12px;width:calc(100% - 24px);background:#ffcc00;border:none;padding:14px;border-radius:14px;font-weight:900;font-size:16px;color:#000}
-.res{text-align:center;font-weight:800;font-size:14px;margin-top:8px;min-height:18px}
-.hist{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;padding:8px}
-.hist span{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10px}
-.win{background:#16361e;color:#4ade80}.lose{background:#3a1a1a;color:#ff7a7a}
-.mines-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:12px}
-.mine{aspect-ratio:1;background:#1c2734;border:1px solid #243041;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900}
-.mine.open{background:#122a18;border-color:#1e6b33}.mine.bomb{background:#3a1a1a;border-color:#6b2424}
-.colorBall{width:85px;height:85px;margin:14px auto;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900}
-.wheel-wrap{position:relative;width:190px;height:190px;margin:14px auto}
-.wheel{width:100%;height:100%;border-radius:50%;border:5px solid #1c2734;background:conic-gradient(#ff4757 0 60deg,#2ed573 60deg 120deg,#ffa502 120deg 180deg,#5352ed 180deg 240deg,#ff4757 240deg 300deg,#2ed573 300deg 360deg);transition:transform 3s cubic-bezier(.17,.67,.12,.99);display:flex;align-items:center;justify-content:center}
-.pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:22px}
-.modal{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:50}
-.modal-box{background:#1a232e;padding:18px;border-radius:16px;width:90%;max-width:360px}
-.modal-box input{width:100%;padding:11px;margin:6px 0;border-radius:10px;border:1px solid #243041;background:#12181f;color:#fff}
-.btn{width:100%;padding:11px;margin-top:7px;border-radius:10px;border:none;font-weight:900}
-.btn-y{background:#ffcc00;color:#000}.btn-d{background:#243041;color:#fff}
-.bottom{position:fixed;bottom:0;width:100%;max-width:440px;background:#1a232e;display:flex;padding:7px;border-top:1px solid #243041;z-index:20}
-.bottom div{flex:1;text-align:center;font-size:11px;font-weight:800;color:#8a9bb0;padding:5px}
-.bottom div.on{color:#ffcc00}
-.refBox{background:#12181f;border:1px dashed #ffcc00;padding:11px;border-radius:12px;text-align:center;margin:9px 0}
-#loginBox{position:fixed;inset:0;background:#0a0e13ee;display:flex;align-items:center;justify-content:center;z-index:99}
-.login-card{background:#1a232e;padding:22px;border-radius:18px;width:90%;max-width:340px}
-.login-card input{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #243041;background:#12181f;color:#fff}
+.card{background:#1c2731;padding:12px;border-radius:12px;margin:10px 0;border:1px solid #222}
+.btn{width:100%;padding:13px;background:#ffcc00;color:#000;border:none;border-radius:10px;font-weight:bold;margin-top:8px;cursor:pointer}
+.inp{width:100%;padding:12px;background:#000;border:1px solid #333;color:#fff;border-radius:8px;margin:6px 0}
 </style>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
-  <!-- FIXED WALLET BUTTON - RAJCODE01 -->
-<div style="position:fixed;top:10px;right:10px;z-index:9999;display:flex;gap:8px;align-items:center;background:#111;padding:8px 12px;border-radius:20px;border:1px solid #00ff88">
-<span style="color:#fff;font-weight:bold">₹<span id="walletBalance">0</span></span>
-<button onclick="openDeposit()" style="background:#00ff88;color:#000;border:none;padding:6px 12px;border-radius:15px;font-weight:bold">+ Add</button>
-</div>
-<div id="loginBox"><div class="login-card">
-<h2 style="color:#ffcc00;text-align:center">RAJCODE LOGIN</h2>
-<input id="email" placeholder="Email">
-<input id="pass" type="password" placeholder="Password">
-<input id="refInput" placeholder="Refer Code (Optional)">
-<button class="btn btn-y" onclick="login()">LOGIN</button>
-<button class="btn btn-d" onclick="signup()">CREATE ACCOUNT</button>
-<p id="logMsg" style="text-align:center;margin-top:8px;color:#ff7a7a;font-size:12px"></p>
-</div></div>
-
-<div id="depModal" class="modal"><div class="modal-box">
-<h3 style="color:#ffcc00">ADD MONEY - UPI</h3>
-<div style="display:flex;gap:5px;margin:10px 0"><div class="b on" onclick="depAmt=100;selDep(this)">₹100</div><div class="b" onclick="depAmt=200;selDep(this)">₹200</div><div class="b" onclick="depAmt=500;selDep(this)">₹500</div><div class="b" onclick="depAmt=1000;selDep(this)">₹1000</div></div>
-<div style="background:#12181f;padding:10px;border-radius:10px;text-align:center">UPI: <b style="color:#ffcc00">rajcode@ybl</b><br><small style="color:#8a9bb0">Change this to your UPI in code</small></div>
-<button class="btn btn-y" onclick="payUPI()">PAY ₹<span id="depShow">100</span> VIA UPI</button>
-<button class="btn btn-d" onclick="instantAdd()">I PAID - ADD NOW</button>
-<button class="btn btn-d" onclick="closeDep()">CLOSE</button>
-</div></div>
-
-<div id="refModal" class="modal"><div class="modal-box">
-<h3 style="color:#ffcc00">REFER & EARN ₹50</h3>
-<div class="refBox"><div style="font-size:10px;color:#8a9bb0">YOUR CODE</div><div id="myRefCode" style="font-size:22px;font-weight:900;color:#ffcc00">----</div>
-<input id="shareLink" readonly style="font-size:11px"><button class="btn btn-y" style="padding:7px" onclick="copyRef()">COPY LINK</button></div>
-<div style="background:#12181f;padding:9px;border-radius:10px;display:flex;justify-content:space-between"><span style="font-size:11px;color:#8a9bb0">Referrals: <b id="refCount" style="color:#fff">0</b></span><span style="font-size:11px;color:#8a9bb0">Earned: ₹<b id="refEarn" style="color:#4ade80">0</b></span></div>
-<button class="btn btn-d" onclick="closeRef()">CLOSE</button>
-</div></div>
-
 <div class="box">
-<div class="top"><b style="color:#ffcc00">RAJCODE</b><div style="display:flex;gap:6px"><button onclick="openDep()" style="background:#4ade80;border:none;padding:5px 10px;border-radius:10px;font-weight:800">+ ADD</button><div class="wal">₹ <span id="bal">0</span></div></div></div>
-<div class="tabs"><div class="tab on" onclick="setMode('toss')">TOSS</div><div class="tab" onclick="setMode('dice')">DICE</div><div class="tab" onclick="setMode('mines')">MINES</div><div class="tab" onclick="setMode('color')">COLOR</div><div class="tab" onclick="setMode('wheel')">WHEEL</div></div>
-<div id="tossArea"><div id="coin" class="coin">₹</div><div class="choice" style="grid-template-columns:1fr 1fr"><div id="h1" class="c on" onclick="side='H';updT()">HEAD</div><div id="h2" class="c" onclick="side='T';updT()">TAIL</div></div></div>
-<div id="diceArea" style="display:none"><div id="dice" class="dice">🎲</div><div class="choice"><div class="c on" onclick="num=1;sel(this)">1</div><div class="c" onclick="num=2;sel(this)">2</div><div class="c" onclick="num=3;sel(this)">3</div><div class="c" onclick="num=4;sel(this)">4</div><div class="c" onclick="num=5;sel(this)">5</div><div class="c" onclick="num=6;sel(this)">6</div></div></div>
-<div id="minesArea" style="display:none"><div style="text-align:center;color:#5a6d83;font-size:11px">MULTIPLIER <span id="multi">x1.00</span></div><div id="grid" class="mines-grid"></div><button id="cashBtn" class="play" style="background:#4ade80;display:none" onclick="cashout()">CASHOUT</button></div>
-<div id="colorArea" style="display:none"><div id="colorBall" class="colorBall" style="background:#1c2734">?</div><div class="choice" style="grid-template-columns:1fr 1fr 1fr"><div class="c" style="background:#ff4757;color:#fff" onclick="color='RED';updCol(this)">RED x2</div><div class="c" style="background:#2ed573;color:#fff" onclick="color='GREEN';updCol(this)">GREEN x2</div><div class="c" style="background:#a55eea;color:#fff" onclick="color='VIOLET';updCol(this)">VIOLET x4.5</div></div></div>
-<div id="wheelArea" style="display:none"><div class="wheel-wrap"><div class="pointer">▼</div><div id="wheel" class="wheel"><b style="background:#0008;padding:5px 10px;border-radius:20px;font-size:12px">SPIN</b></div></div><div class="choice" style="grid-template-columns:repeat(4,1fr)"><div class="c on" onclick="wheelBet='RED';selW(this)">RED</div><div class="c" onclick="wheelBet='GREEN';selW(this)">GREEN</div><div class="c" onclick="wheelBet='YELLOW';selW(this)">YELLOW</div><div class="c" onclick="wheelBet='BLUE';selW(this)">BLUE</div></div></div>
-<div class="bets"><div class="b on" onclick="bet=10;selBet(this)">₹10</div><div class="b" onclick="bet=50;selBet(this)">₹50</div><div class="b" onclick="bet=100;selBet(this)">₹100</div><div class="b" onclick="bet=200;selBet(this)">₹200</div></div>
-<button id="mainBtn" class="play" onclick="playGame()">PLAY NOW</button>
-<div id="res" class="res"></div><div id="hist" class="hist"></div>
+<div class="top">
+<div class="logo">RAJCODE</div>
+<div class="wal">₹<span id="walletBalance">1000</span> <button onclick="openDeposit()">+ ADD</button></div>
 </div>
-<div class="bottom"><div class="on">🎮 GAME</div><div onclick="openDep()">💰 ADD</div><div onclick="openRef()">👥 REFER</div><div onclick="logout()">🚪 OUT</div></div>
-
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyBBN89rxG_qICL2AUIfiXP-mqgs1yXuBQ0",
-  authDomain: "rajcode01-8bd07.firebaseapp.com",
-  projectId: "rajcode01-8bd07",
-  storageBucket: "rajcode01-8bd07.firebasestorage.app",
-  messagingSenderId: "282548885780",
-  appId: "1:282548885780:web:289534a5cb7e05e0894a01"
-};
-firebase.initializeApp(firebaseConfig);
-const auth=firebase.auth(), db=firebase.firestore();
-let bal=0,mode='toss',side='H',num=1,bet=10,hist=[],color='RED',wheelBet='RED',mines=[],revealed=0,playingMines=false,multi=1,spinDeg=0,currentUser=null,depAmt=100,myRef='';
-auth.onAuthStateChanged(async(user)=>{
- if(user){
-  currentUser=user;loginBox.style.display='none';
-  let doc=await db.collection('users').doc(user.uid).get();
-  if(!doc.exists){
-   myRef=user.uid.slice(0,6).toUpperCase();
-   let data={email:user.email,balance:1000,refCode:myRef,refCount:0,refEarn:0,createdAt:Date.now()};
-   let p=new URLSearchParams(location.search); if(p.get('ref')) data.referredBy=p.get('ref').toUpperCase(); if(refInput.value) data.referredBy=refInput.value.toUpperCase();
-   await db.collection('users').doc(user.uid).set(data);
-   if(data.referredBy){let q=await db.collection('users').where('refCode','==',data.referredBy).get(); if(!q.empty) await db.collection('users').doc(q.docs[0].id).update({refCount:firebase.firestore.FieldValue.increment(1)});}
-   bal=1000;
-  }else{bal=doc.data().balance; myRef=doc.data().refCode; refCount.innerText=doc.data().refCount||0; refEarn.innerText=doc.data().refEarn||0;}
-  myRefCode.innerText=myRef; shareLink.value=location.origin+'/?ref='+myRef; upd();
- }else{loginBox.style.display='flex';}
-});
-async function saveBal(){if(currentUser)await db.collection('users').doc(currentUser.uid).update({balance:bal});}
-function login(){auth.signInWithEmailAndPassword(email.value,pass.value).catch(e=>logMsg.innerText=e.message);}
-function signup(){auth.createUserWithEmailAndPassword(email.value,pass.value).catch(e=>logMsg.innerText=e.message);}
-function logout(){auth.signOut();}
-function openDep(){depModal.style.display='flex';}function closeDep(){depModal.style.display='none';}
-function openRef(){refModal.style.display='flex';}function closeRef(){refModal.style.display='none';}
-function copyRef(){shareLink.select();document.execCommand('copy');alert('Link Copied!');}
-function sel(e){e.parentElement.querySelectorAll('.c').forEach(x=>x.classList.remove('on'));e.classList.add('on');}
-function selW(e){e.parentElement.querySelectorAll('.c').forEach(x=>x.classList.remove('on'));e.classList.add('on');}
-function selBet(e){document.querySelectorAll('.b').forEach(x=>x.classList.remove('on'));e.classList.add('on');}
-function selDep(e){e.parentElement.querySelectorAll('.b').forEach(x=>x.classList.remove('on'));e.classList.add('on');document.getElementById('depShow').innerText=depAmt;}
-function updT(){h1.classList.toggle('on',side=='H');h2.classList.toggle('on',side=='T');}
-function updCol(e){e.parentElement.querySelectorAll('.c').forEach(x=>x.style.outline='');e.style.outline='2px solid #ffcc00';}
-function setMode(m){mode=m;document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',['toss','dice','mines','color','wheel'][i]==m));['toss','dice','mines','color','wheel'].forEach(x=>document.getElementById(x+'Area').style.display=x==m?'block':'none');document.getElementById('mainBtn').style.display=(m=='mines'&&playingMines)?'none':'block';}
-function payUPI(){let upi='rajcode@ybl';let url=`upi://pay?pa=${upi}&pn=RAJCODE&am=${depAmt}&cu=INR`;window.location.href=url;}
-async function instantAdd(){bal+=depAmt;upd();saveBal();closeDep();alert('₹'+depAmt+' Added!'); let udoc=await db.collection('users').doc(currentUser.uid).get(); if(udoc.data().referredBy &&!udoc.data().bonusGiven){let q=await db.collection('users').where('refCode','==',udoc.data().referredBy).get(); if(!q.empty){await db.collection('users').doc(q.docs[0].id).update({balance:firebase.firestore.FieldValue.increment(50),refEarn:firebase.firestore.FieldValue.increment(50)}); await db.collection('users').doc(currentUser.uid).update({bonusGiven:true,balance:firebase.firestore.FieldValue.increment(50)}); bal+=50; upd(); saveBal();}}}
-function playGame(){
- if(bal<bet &&!(mode=='mines'&&playingMines)){res.innerText='LOW BALANCE - ADD MONEY';res.style.color='#ff7a7a';return;}
- if(mode=='toss'){res.innerText='TOSSING...';setTimeout(()=>{let w=Math.random()>0.5?'H':'T';coin.innerText=w;if(w==side){bal+=bet;win('WON +₹'+bet,w);}else{bal-=bet;lose('LOST -₹'+bet,w);}},500);}
- else if(mode=='dice'){res.innerText='ROLLING...';setTimeout(()=>{let w=Math.floor(Math.random()*6)+1;dice.innerText=w;if(w==num){bal+=bet*5;win('JACKPOT +₹'+(bet*5),w);}else{bal-=bet;lose('LOST Aya '+w,w);}},500);}
- else if(mode=='mines'){if(!playingMines)startMines();}
- else if(mode=='color'){res.innerText='PICKING...';setTimeout(()=>{let cols=['RED','GREEN','VIOLET'];let w=cols[Math.random()<0.15?2:Math.floor(Math.random()*2)];colorBall.innerText=w[0];colorBall.style.background=w=='RED'?'#ff4757':w=='GREEN'?'#2ed573':'#a55eea';if(w==color){let wa=color=='VIOLET'?Math.floor(bet*4.5):bet;bal+=wa;win('WON +₹'+wa,w[0]);}else{bal-=bet;lose('LOST '+w,w[0]);}},600);}
- else if(mode=='wheel'){bal-=bet;upd();res.innerText='SPINNING...';spinDeg+=1800+Math.random()*1000;wheel.style.transform='rotate('+spinDeg+'deg)';setTimeout(()=>{let cols=['RED','GREEN','YELLOW','BLUE'];let idx=Math.floor(((360-spinDeg%360)/60))%4;if(idx<0)idx+=4;let w=cols[idx];if(w==wheelBet){let wa=bet*3;bal+=wa;win('WON +₹'+wa+' '+w,w[0]);}else{lose('LOST '+w,w[0]);}},3100);}
-}
-function win(t,tag){res.innerText=t;res.style.color='#4ade80';hist.unshift({t:tag,ok:true});finish();}
-function lose(t,tag){res.innerText=t;res.style.color='#ff7a7a';hist.unshift({t:tag,ok:false});finish();}
-function finish(){upd();saveBal();if(hist.length>15)hist.pop();histEl.innerHTML=hist.map(x=>`<span class="${x.ok?'win':'lose'}">${x.t}</span>`).join('');}
-function upd(){balEl.innerText=bal;}
-function startMines(){if(bal<bet){res.innerText='LOW BALANCE';return;}bal-=bet;upd();saveBal();mines=Array(25).fill(0).map(()=>Math.random()<0.22?1:0);revealed=0;multi=1;playingMines=true;res.innerText='PICK SAFE BOXES!';cashBtn.style.display='none';mainBtn.style.display='none';buildGrid();setMode('mines');}
-function buildGrid(){grid.innerHTML='';for(let i=0;i<25;i++){let d=document.createElement('div');d.className='mine';d.onclick=()=>clickMine(i);grid.appendChild(d);}multiEl.innerText='x1.00';}
-function clickMine(i){if(!playingMines)return;let cells=document.querySelectorAll('.mine');if(cells[i].classList.contains('open')||cells[i].classList.contains('bomb'))return;if(mines[i]==1){cells[i].classList.add('bomb');cells[i].innerText='💣';res.innerText='BOOM! -₹'+bet;playingMines=false;mainBtn.style.display='block';mines.forEach((m,idx)=>{if(m==1){cells[idx].innerText='💣';cells[idx].classList.add('bomb');}});hist.unshift({t:'💣',ok:false});finish();}else{cells[i].classList.add('open');cells[i].innerText='💎';revealed++;multi=(1+revealed*0.3).toFixed(2);multiEl.innerText='x'+multi;cashBtn.style.display='block';cashBtn.innerText='CASHOUT ₹'+Math.floor(bet*multi);res.innerText='SAFE x'+multi;}}
-function cashout(){if(!playingMines)return;let wa=Math.floor(bet*multi);bal+=wa;upd();saveBal();res.innerText='CASHOUT +₹'+wa;playingMines=false;mainBtn.style.display='block';cashBtn.style.display='none';hist.unshift({t:'x'+multi,ok:true});finish();}
-let res=document.getElementById('res'),coin=document.getElementById('coin'),dice=document.getElementById('dice'),balEl=document.getElementById('bal'),histEl=document.getElementById('hist'),grid=document.getElementById('grid'),multiEl=document.getElementById('multi'),mainBtn=document.getElementById('mainBtn'),cashBtn=document.getElementById('cashBtn'),colorBall=document.getElementById('colorBall'),wheel=document.getElementById('wheel'),depModal=document.getElementById('depModal'),refModal=document.getElementById('refModal'),shareLink=document.getElementById('shareLink'),loginBox=document.getElementById('loginBox'),logMsg=document.getElementById('logMsg'),myRefCode=document.getElementById('myRefCode'),refCount=document.getElementById('refCount'),refEarn=document.getElementById('refEarn');
-let p=new URLSearchParams(location.search);if(p.get('ref')){refInput.value=p.get('ref');}
-</script>
-  <!-- DEPOSIT SYSTEM BY RAJCODE01 -->
-<div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;justify-content:center;align-items:center">
-<div style="background:#1e1e1e;padding:20px;border-radius:15px;width:90%;max-width:350px">
-<h2 style="color:#00ff88">💰 Add Money</h2>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=YOUR_UPI@upi" style="width:200px;display:block;margin:10px auto;border-radius:10px;background:#fff;padding:10px">
-<p style="text-align:center;color:#aaa;font-size:13px">UPI ID: YOUR_UPI@upi pe pay karo</p>
-<input id="depAmount" type="number" placeholder="Amount (e.g. 100)" style="width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none;background:#333;color:#fff">
-<input id="depUtr" type="text" placeholder="UTR / Transaction ID (12 digit)" style="width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none;background:#333;color:#fff">
-<input id="depScreenshot" type="file" accept="image/*" style="width:100%;padding:8px;margin:8px 0;color:#fff">
-<button onclick="submitDeposit()" style="width:100%;padding:12px;background:#00ff88;border:none;border-radius:8px;font-weight:bold;margin-top:10px">Submit Request</button>
-<button onclick="document.getElementById('depositModal').style.display='none'" style="width:100%;padding:10px;background:#333;color:#fff;border:none;border-radius:8px;margin-top:8px">Cancel</button>
+<div class="tabs">
+<div class="tab on">🎮 GAME</div>
+<div class="tab" onclick="openDeposit()">💰 ADD</div>
+<div class="tab">👥 REFER</div>
+<div class="tab">💸 OUT</div>
+</div>
+<div class="card">
+<h3 style="color:#ffcc00">🎯 Play & Win</h3>
+<p style="color:#aaa;font-size:13px;margin:8px 0">Select karo, jeeto bada!</p>
+<button class="btn" onclick="playGame()">PLAY NOW - ₹10</button>
 </div>
 </div>
 
-<script>
-function openDeposit(){
- document.getElementById('depositModal').style.display='flex';
-}
-function submitDeposit(){
- const amount = document.getElementById('depAmount').value;
- const utr = document.getElementById('depUtr').value;
- const fileInput = document.getElementById('depScreenshot');
- if(!amount ||!utr){ alert('Amount aur UTR bharo'); return; }
- if(fileInput.files[0]){
-   const reader = new FileReader();
-   reader.onload = function(e){
-     saveDeposit(amount, utr, e.target.result);
-   }
-   reader.readAsDataURL(fileInput.files[0]);
- } else {
-   saveDeposit(amount, utr, '');
- }
-}
-function saveDeposit(amount, utr, screenshot){
- let deposits = JSON.parse(localStorage.getItem('raj_deposits') || '[]');
- deposits.push({
-   amount: amount,
-   utr: utr,
-   screenshot: screenshot,
-   user: localStorage.getItem('username') || 'Guest_'+Math.floor(Math.random()*1000),
-   time: new Date().toLocaleString()
- });
- localStorage.setItem('raj_deposits', JSON.stringify(deposits));
- alert('Deposit Request Sent! Admin approve karega 2 min me');
- document.getElementById('depositModal').style.display='none';
-}
-</script>
-  <div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;justify-content:center;align-items:center">
-<div style="background:#1e1e1e;padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center">
-<h2 style="color:#00ff88">💰 Add Money</h2>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=demo@upi" style="width:200px;margin:10px auto;background:#fff;padding:10px;border-radius:10px">
-<p style="color:#aaa;font-size:13px">UPI ID: demo@upi</p>
-<input id="depAmount" type="number" placeholder="Amount" style="width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none;background:#333;color:#fff">
-<input id="depUtr" type="text" placeholder="UTR (12 digit)" style="width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none;background:#333;color:#fff">
+<div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:10000;justify-content:center;align-items:center;padding:15px">
+<div style="background:#1e2a35;padding:20px;border-radius:18px;width:100%;max-width:360px;text-align:center;border:1px solid #ffcc00">
+<h2 style="color:#00ff88;margin-bottom:10px">💰 Add Money</h2>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=rajcode@ybl&pn=RajCode&am=100&cu=INR" style="width:210px;margin:10px auto;background:#fff;padding:10px;border-radius:12px;display:block">
+<p style="color:#fff;margin:8px 0;font-size:15px">UPI ID: <b style="color:#ffcc00">rajcode@ybl</b></p>
+<p style="color:#aaa;font-size:12px;margin-bottom:12px">UPI App se pay karo</p>
+<input id="depAmount" type="number" placeholder="Amount (e.g. 100)" style="width:100%;padding:12px;background:#000;border:1px solid #333;color:#fff;border-radius:8px;margin:6px 0">
+<input id="depUtr" type="text" placeholder="UTR / Transaction ID (12 digit)" style="width:100%;padding:12px;background:#000;border:1px solid #333;color:#fff;border-radius:8px;margin:6px 0">
 <input id="depScreenshot" type="file" accept="image/*" style="width:100%;padding:8px;color:#fff">
-<button onclick="submitDeposit()" style="width:100%;padding:12px;background:#00ff88;border:none;border-radius:8px;font-weight:bold;margin-top:10px">Submit</button>
-<button onclick="document.getElementById('depositModal').style.display='none'" style="width:100%;padding:10px;background:#333;color:#fff;border:none;border-radius:8px;margin-top:8px">Cancel</button>
-</div>
-</div>
-<div style="position:fixed;top:10px;right:10px;z-index:9999;background:#111;padding:8px 12px;border-radius:20px;border:1px solid #ffcc00;display:flex;align-items:center;gap:8px">
-<span style="color:#fff">₹<span id="walletBalance">1000</span></span>
-<button onclick="openDeposit()" style="background:#ffcc00;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;">+ ADD</button>
-</div>
-
-<div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:10000;justify-content:center;align-items:center">
-<div style="background:#1e1e1e;padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center;border:1px solid #ffcc00">
-<h2 style="color:#ffcc00">💰 Add Money</h2>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=rajcode@ybl&pn=RajCode&am=100&cu=INR" style="width:200px;margin:15px auto;background:#fff;padding:10px;border-radius:10px">
-<p style="color:#fff;margin:5px 0">UPI ID: <b style="color:#ffcc00">rajcode@ybl</b></p>
-<p style="color:#aaa;font-size:12px;margin-bottom:10px">Pay karke I PAID dabao</p>
-<input id="depAmount" type="number" placeholder="Amount (100)" style="width:100%;padding:12px;margin:6px 0;border-radius:8px;border:none;background:#333;color:#fff">
-<input id="depUtr" type="text" placeholder="UTR / Transaction ID (12 digit)" style="width:100%;padding:12px;margin:6px 0;border-radius:8px;border:none;background:#333;color:#fff">
-<input id="depScreenshot" type="file" accept="image/*" style="width:100%;padding:8px;color:#fff;font-size:12px">
-<button onclick="submitDeposit()" style="width:100%;padding:12px;background:#ffcc00;border:none;border-radius:8px;font-weight:bold;margin-top:10px;color:#000">I PAID - SUBMIT</button>
-<button onclick="document.getElementById('depositModal').style.display='none'" style="width:100%;padding:10px;background:#333;color:#fff;border:none;border-radius:8px;margin-top:8px">Cancel</button>
+<button onclick="submitDeposit()" style="width:100%;padding:13px;background:#00ff88;border:none;border-radius:10px;font-weight:bold;margin-top:10px;color:#000">Submit Request</button>
+<button onclick="document.getElementById('depositModal').style.display='none'" style="width:100%;padding:11px;background:#2a3a4a;color:#fff;border:none;border-radius:10px;margin-top:8px">Cancel</button>
 </div>
 </div>
 
 <script>
+let bal=parseInt(localStorage.getItem('wallet')||'1000');
+document.getElementById('walletBalance').innerText=bal;
 function openDeposit(){document.getElementById('depositModal').style.display='flex';}
-function submitDeposit(){
- const a=document.getElementById('depAmount').value;
- const u=document.getElementById('depUtr').value;
- const f=document.getElementById('depScreenshot');
- if(!a||!u){alert('Amount aur UTR bharo');return;}
- if(f.files[0]){
-  const r=new FileReader();r.onload=function(e){saveDep(a,u,e.target.result)};r.readAsDataURL(f.files[0]);
- }else{saveDep(a,u,'');}
-}
-function saveDep(amount,utr,ss){
- let d=JSON.parse(localStorage.getItem('raj_deposits')||'[]');
- d.push({amount,utr,screenshot:ss,user:localStorage.getItem('username')||'Guest',time:new Date().toLocaleString()});
- localStorage.setItem('raj_deposits',JSON.stringify(d));
- alert('Request Sent! Admin 2 min me approve karega');document.getElementById('depositModal').style.display='none';
-}
+function playGame(){if(bal<10){alert('Paisa Add karo');openDeposit();return;}bal-=10;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;let win=Math.random()>0.5;if(win){bal+=18;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;alert('🎉 Jeet gaye! ₹18 mila');}else{alert('😢 Haar gaye');}}
+function submitDeposit(){const a=document.getElementById('depAmount').value;const u=document.getElementById('depUtr').value;const f=document.getElementById('depScreenshot');if(!a||!u){alert('Amount aur UTR bharo');return;}if(f.files[0]){const r=new FileReader();r.onload=function(e){saveDep(a,u,e.target.result)};r.readAsDataURL(f.files[0]);}else{saveDep(a,u,'');}}
+function saveDep(amount,utr,ss){let d=JSON.parse(localStorage.getItem('raj_deposits')||'[]');d.push({amount,utr,screenshot:ss,user:localStorage.getItem('username')||'Guest',time:new Date().toLocaleString(),status:'pending'});localStorage.setItem('raj_deposits',JSON.stringify(d));alert('✅ Request Sent!');document.getElementById('depositModal').style.display='none';}
 </script>
-
 </body>
 </html>
