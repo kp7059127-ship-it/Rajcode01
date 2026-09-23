@@ -1,10 +1,10 @@
-Filmlane - Best movie collections
+Rajcode01 - Best movie collections
 
 
 
 # HEADER
 
-alt = Filmlane logo
+alt = Rajcode01 logo
 
 <ion-icon name="search-outline"></ion-icon>
 
@@ -19,7 +19,7 @@ Sign in
 
 <ion-icon name="reorder-two"></ion-icon>
 
-alt = Filmlane logo
+alt = Rajcode01 logo
 
 <ion-icon name="close-outline"></ion-icon>
 
@@ -39,7 +39,7 @@ Pricing
 
 # HERO
 
-Filmlane
+Rajcode01
 Unlimited Movie, TVs Shows, & More.
 
 PG 18
