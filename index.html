@@ -3,56 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Rajcode - Toss & Dice</title>
+<title>RAJCODE - 5 Games</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 body{background:#0a0e13;color:#fff;display:flex;justify-content:center}
-.box{width:100%;max-width:430px;background:#12181f;min-height:100vh}
-.top{display:flex;justify-content:space-between;padding:15px;background:#1a232e}
+.box{width:100%;max-width:440px;background:#12181f;min-height:100vh;padding-bottom:20px}
+.top{display:flex;justify-content:space-between;padding:15px;background:#1a232e;position:sticky;top:0;z-index:10}
 .wal{background:#ffcc00;color:#000;padding:6px 14px;border-radius:20px;font-weight:800}
-.tabs{display:flex;background:#1a232e;margin:12px;border-radius:12px;padding:4px}
-.tab{flex:1;padding:10px;text-align:center;border-radius:9px;font-weight:800;color:#8a9bb0}
+.tabs{display:flex;gap:5px;background:#1a232e;margin:10px;border-radius:12px;padding:5px;overflow-x:auto;white-space:nowrap}
+.tab{flex:1;min-width:60px;padding:9px 8px;text-align:center;border-radius:8px;font-weight:800;color:#8a9bb0;font-size:11px}
 .tab.on{background:#ffcc00;color:#000}
-.coin{width:120px;height:120px;margin:25px auto;border-radius:50%;background:gold;display:flex;align-items:center;justify-content:center;font-size:60px;color:#000;font-weight:900}
-.dice{width:120px;height:120px;margin:25px auto;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:70px}
-.choice{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 14px;margin-top:10px}
-.c{padding:14px;background:#1c2734;border:2px solid #243041;border-radius:12px;text-align:center;font-weight:800}
+.coin{width:100px;height:100px;margin:15px auto;border-radius:50%;background:gold;display:flex;align-items:center;justify-content:center;font-size:50px;color:#000;font-weight:900}
+.dice{width:100px;height:100px;margin:15px auto;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:60px}
+.choice{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:0 12px;margin-top:8px}
+.c{padding:12px;background:#1c2734;border:2px solid #243041;border-radius:11px;text-align:center;font-weight:800;font-size:13px}
 .c.on{border-color:#ffcc00;color:#ffcc00;background:#ffcc0015}
-.bets{display:flex;gap:7px;padding:10px 14px}
-.b{flex:1;background:#1c2734;padding:10px;border-radius:10px;text-align:center;border:1px solid #243041}
+.bets{display:flex;gap:6px;padding:10px 12px}
+.b{flex:1;background:#1c2734;padding:9px;border-radius:10px;text-align:center;border:1px solid #243041;font-size:12px}
 .b.on{background:#ffcc00;color:#000;font-weight:800}
-.play{margin:12px 14px;width:calc(100% - 28px);background:#ffcc00;border:none;padding:15px;border-radius:14px;font-weight:900;font-size:17px}
-.res{text-align:center;font-weight:800;font-size:18px;margin-top:12px;min-height:24px}
-.hist{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:10px}
-.hist span{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
-.win{background:#16361e;color:#4ade80} .lose{background:#3a1a1a;color:#ff7a7a}
+.play{margin:10px 12px;width:calc(100% - 24px);background:#ffcc00;border:none;padding:14px;border-radius:14px;font-weight:900;font-size:16px;color:#000}
+.res{text-align:center;font-weight:800;font-size:15px;margin-top:8px;min-height:20px}
+.hist{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;padding:8px}
+.hist span{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px}
+.win{background:#16361e;color:#4ade80}.lose{background:#3a1a1a;color:#ff7a7a}
+/* Mines */
+.mines-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:12px}
+.mine{aspect-ratio:1;background:#1c2734;border:1px solid #243041;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900}
+.mine.open{background:#122a18;border-color:#1e6b33}
+.mine.bomb{background:#3a1a1a;border-color:#6b2424}
+/* Color */
+.colorBall{width:90px;height:90px;margin:15px auto;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;transition:0.3s}
+/* Wheel */
+.wheel-wrap{position:relative;width:200px;height:200px;margin:15px auto}
+.wheel{width:100%;height:100%;border-radius:50%;border:5px solid #1c2734;background:conic-gradient(#ff4757 0 60deg,#2ed573 60deg 120deg,#ffa502 120deg 180deg,#5352ed 180deg 240deg,#ff4757 240deg 300deg,#2ed573 300deg 360deg);transition:transform 3s cubic-bezier(.17,.67,.12,.99);display:flex;align-items:center;justify-content:center}
+.pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:24px;z-index:2}
 </style>
 </head>
 <body>
 <div class="box">
 <div class="top"><b style="color:#ffcc00">RAJCODE</b><div class="wal">₹ <span id="bal">1000</span></div></div>
-<div class="tabs"><div id="t1" class="tab on" onclick="mode='toss';showTab()">TOSS</div><div id="t2" class="tab" onclick="mode='dice';showTab()">DICE</div></div>
-<div id="tossArea"><div id="coin" class="coin">₹</div><div class="choice" style="grid-template-columns:1fr 1fr"><div id="h1" class="c on" onclick="side='H';upd()">HEAD</div><div id="h2" class="c" onclick="side='T';upd()">TAIL</div></div></div>
-<div id="diceArea" style="display:none"><div id="dice" class="dice">🎲</div><div class="choice"><div class="c on" onclick="num=1;updDice(this)">1</div><div class="c" onclick="num=2;updDice(this)">2</div><div class="c" onclick="num=3;updDice(this)">3</div><div class="c" onclick="num=4;updDice(this)">4</div><div class="c" onclick="num=5;updDice(this)">5</div><div class="c" onclick="num=6;updDice(this)">6</div></div></div>
-<div class="bets"><div class="b on" onclick="bet=10;updBet(this)">₹10</div><div class="b" onclick="bet=50;updBet(this)">₹50</div><div class="b" onclick="bet=100;updBet(this)">₹100</div><div class="b" onclick="bet=200;updBet(this)">₹200</div></div>
-<button class="play" onclick="play()">PLAY NOW</button>
+<div class="tabs">
+<div id="tb1" class="tab on" onclick="setMode('toss')">TOSS</div>
+<div id="tb2" class="tab" onclick="setMode('dice')">DICE</div>
+<div id="tb3" class="tab" onclick="setMode('mines')">MINES</div>
+<div id="tb4" class="tab" onclick="setMode('color')">COLOR</div>
+<div id="tb5" class="tab" onclick="setMode('wheel')">WHEEL</div>
+</div>
+
+<!-- TOSS -->
+<div id="tossArea"><div id="coin" class="coin">₹</div><div class="choice" style="grid-template-columns:1fr 1fr"><div id="h1" class="c on" onclick="side='H';updT()">HEAD</div><div id="h2" class="c" onclick="side='T';updT()">TAIL</div></div></div>
+
+<!-- DICE -->
+<div id="diceArea" style="display:none"><div id="dice" class="dice">🎲</div><div class="choice"><div class="c on" onclick="num=1;sel(this)">1</div><div class="c" onclick="num=2;sel(this)">2</div><div class="c" onclick="num=3;sel(this)">3</div><div class="c" onclick="num=4;sel(this)">4</div><div class="c" onclick="num=5;sel(this)">5</div><div class="c" onclick="num=6;sel(this)">6</div></div></div>
+
+<!-- MINES -->
+<div id="minesArea" style="display:none"><div style="text-align:center;color:#5a6d83;font-size:11px;margin-top:6px">MULTIPLIER <span id="multi">x1.00</span></div><div id="grid" class="mines-grid"></div><button id="cashBtn" class="play" style="background:#4ade80;display:none" onclick="cashout()">CASHOUT</button></div>
+
+<!-- COLOR -->
+<div id="colorArea" style="display:none"><div id="colorBall" class="colorBall" style="background:#1c2734">?</div><div class="choice" style="grid-template-columns:1fr 1fr 1fr"><div class="c" style="background:#ff4757;color:#fff" onclick="color='RED';updCol(this)">🔴 RED x2</div><div class="c" style="background:#2ed573;color:#fff" onclick="color='GREEN';updCol(this)">🟢 GREEN x2</div><div class="c" style="background:linear-gradient(45deg,#a55eea,#8c7ae6);color:#fff" onclick="color='VIOLET';updCol(this)">🟣 VIOLET x4.5</div></div><div style="text-align:center;color:#5a6d83;font-size:10px;margin-top:8px">RED/GREEN = 2x | VIOLET = 4.5x</div></div>
+
+<!-- WHEEL -->
+<div id="wheelArea" style="display:none"><div class="wheel-wrap"><div class="pointer">▼</div><div id="wheel" class="wheel"><b style="background:#0008;padding:6px 12px;border-radius:20px">SPIN</b></div></div><div class="choice" style="grid-template-columns:repeat(4,1fr)"><div class="c on" onclick="wheelBet='RED';selW(this)">RED</div><div class="c" onclick="wheelBet='GREEN';selW(this)">GREEN</div><div class="c" onclick="wheelBet='YELLOW';selW(this)">YELLOW</div><div class="c" onclick="wheelBet='BLUE';selW(this)">BLUE</div></div><div style="text-align:center;color:#5a6d83;font-size:10px">Correct Color = 3x Win</div></div>
+
+<div class="bets"><div class="b on" onclick="bet=10;updB(this)">₹10</div><div class="b" onclick="bet=50;updB(this)">₹50</div><div class="b" onclick="bet=100;updB(this)">₹100</div><div class="b" onclick="bet=200;updB(this)">₹200</div></div>
+<button id="mainBtn" class="play" onclick="playGame()">PLAY NOW</button>
 <div id="res" class="res"></div><div id="hist" class="hist"></div>
 </div>
+
 <script>
-let bal=1000,mode='toss',side='H',num=1,bet=10,h=[];
-function showTab(){document.getElementById('t1').classList.toggle('on',mode=='toss');document.getElementById('t2').classList.toggle('on',mode=='dice');document.getElementById('tossArea').style.display=mode=='toss'?'block':'none';document.getElementById('diceArea').style.display=mode=='dice'?'block':'none';}
-function upd(){document.getElementById('h1').classList.toggle('on',side=='H');document.getElementById('h2').classList.toggle('on',side=='T');}
-function updDice(e){document.querySelectorAll('#diceArea .c').forEach(x=>x.classList.remove('on'));e.classList.add('on');}
-function updBet(e){document.querySelectorAll('.b').forEach(x=>x.classList.remove('on'));e.classList.add('on');}
-function play(){
- if(bal<bet){res.innerText='LOW BALANCE';return;}
- res.innerText='ROLLING...';
- setTimeout(()=>{
-  if(mode=='toss'){let w=Math.random()>0.5?'H':'T';document.getElementById('coin').innerText=w;if(w==side){bal+=bet;res.innerText='WON +₹'+bet;res.style.color='#4ade80';h.unshift({t:w,ok:true});}else{bal-=bet;res.innerText='LOST -₹'+bet;res.style.color='#ff7a7a';h.unshift({t:w,ok:false});}}
-  else{let w=Math.floor(Math.random()*6)+1;document.getElementById('dice').innerText=w;if(w==num){bal+=bet*5;res.innerText='JACKPOT +₹'+(bet*5);res.style.color='#4ade80';h.unshift({t:w,ok:true});}else{bal-=bet;res.innerText='LOST -₹'+bet+' Aya '+w;res.style.color='#ff7a7a';h.unshift({t:w,ok:false});}}
-  document.getElementById('bal').innerText=bal;if(h.length>15)h.pop();document.getElementById('hist').innerHTML=h.map(x=>`<span class="${x.ok?'win':'lose'}">${x.t}</span>`).join('');
- },600);
+let bal=1000,mode='toss',side='H',num=1,bet=10,hist=[],color='RED',wheelBet='RED',mines=[],revealed=0,playingMines=false,multi=1,spinDeg=0;
+function setMode(m){mode=m;document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',['toss','dice','mines','color','wheel'][i]==m));['toss','dice','mines','color','wheel'].forEach(x=>document.getElementById(x+'Area').style.display=x==m?'block':'none');document.getElementById('mainBtn').style.display=(m=='mines'&&playingMines)?'none':'block';}
+function updT(){document.getElementById('h1').classList.toggle('on',side=='H');document.getElementById('h2').classList.toggle('on',side=='T');}
+function sel(e){e.parentElement.querySelectorAll('.c').forEach(x=>x.classList.remove('on'));e.classList.add('on');}
+function selW(e){document.querySelectorAll('#wheelArea.c').forEach(x=>x.classList.remove('on'));e.classList.add('on');}
+function updCol(e){document.querySelectorAll('#colorArea.c').forEach(x=>x.style.outline='');e.style.outline='3px solid #ffcc00';}
+function updB(e){document.querySelectorAll('.b').forEach(x=>x.classList.remove('on'));e.classList.add('on');}
+
+function playGame(){
+ if(bal<bet &&!(mode=='mines'&&playingMines)){res.innerText='LOW BALANCE';res.style.color='#ff7a7a';return;}
+ if(mode=='toss'){res.innerText='TOSSING...';res.style.color='#ffcc00';setTimeout(()=>{let w=Math.random()>0.5?'H':'T';document.getElementById('coin').innerText=w;if(w==side){bal+=bet;win('WON +₹'+bet,w);}else{bal-=bet;lose('LOST -₹'+bet,w);}},600);}
+ else if(mode=='dice'){res.innerText='ROLLING...';setTimeout(()=>{let w=Math.floor(Math.random()*6)+1;document.getElementById('dice').innerText=w;if(w==num){bal+=bet*5;win('JACKPOT +₹'+(bet*5),w);}else{bal-=bet;lose('LOST Aya '+w,w);}},600);}
+ else if(mode=='mines'){if(!playingMines)startMines();}
+ else if(mode=='color'){res.innerText='PICKING...';let ball=document.getElementById('colorBall');setTimeout(()=>{let colors=['RED','GREEN','VIOLET'];let w=colors[Math.floor(Math.random()*10)>7?2:Math.floor(Math.random()*2)];ball.innerText=w[0];ball.style.background=w=='RED'?'#ff4757':w=='GREEN'?'#2ed573':'#a55eea';if(w==color){let winAmt=color=='VIOLET'?Math.floor(bet*4.5):bet;bal+=winAmt;win('WON +₹'+winAmt,w[0]);}else{bal-=bet;lose('LOST Aya '+w,w[0]);}},700);}
+ else if(mode=='wheel'){if(bal<bet)return;bal-=bet;upd();res.innerText='SPINNING...';let wheel=document.getElementById('wheel');spinDeg+=1800+Math.random()*1000;wheel.style.transform='rotate('+spinDeg+'deg)';setTimeout(()=>{let cols=['RED','GREEN','YELLOW','BLUE'];let idx=Math.floor(((360-spinDeg%360)/60))%4;if(idx<0)idx+=4;let w=cols[idx];if(w==wheelBet){let wa=bet*3;bal+=wa;win('WON +₹'+wa+' '+w,w[0]);}else{lose('LOST Aya '+w,w[0]);}},3100);}
 }
+
+function win(t,tag){res.innerText=t;res.style.color='#4ade80';hist.unshift({t:tag,ok:true});finish();}
+function lose(t,tag){res.innerText=t;res.style.color='#ff7a7a';hist.unshift({t:tag,ok:false});finish();}
+function finish(){document.getElementById('bal').innerText=bal;if(hist.length>15)hist.pop();document.getElementById('hist').innerHTML=hist.map(x=>`<span class="${x.ok?'win':'lose'}">${x.t}</span>`).join('');}
+function upd(){document.getElementById('bal').innerText=bal;}
+// Mines logic
+function startMines(){bal-=bet;upd();mines=Array(25).fill(0).map(()=>Math.random()<0.22?1:0);revealed=0;multi=1;playingMines=true;res.innerText='PICK SAFE!';res.style.color='#ffcc00';document.getElementById('cashBtn').style.display='none';document.getElementById('mainBtn').style.display='none';buildGrid();setMode('mines');}
+function buildGrid(){let g=document.getElementById('grid');g.innerHTML='';for(let i=0;i<25;i++){let d=document.createElement('div');d.className='mine';d.onclick=()=>clickMine(i);g.appendChild(d);}document.getElementById('multi').innerText='x1.00';}
+function clickMine(i){if(!playingMines)return;let cells=document.querySelectorAll('.mine');if(cells[i].classList.contains('open')||cells[i].classList.contains('bomb'))return;if(mines[i]==1){cells[i].classList.add('bomb');cells[i].innerText='💣';res.innerText='BOOM! -₹'+bet;res.style.color='#ff7a7a';playingMines=false;document.getElementById('mainBtn').style.display='block';mines.forEach((m,idx)=>{if(m==1){cells[idx].innerText='💣';cells[idx].classList.add('bomb');}});hist.unshift({t:'💣',ok:false});finish();}else{cells[i].classList.add('open');cells[i].innerText='💎';revealed++;multi=(1+revealed*0.3).toFixed(2);document.getElementById('multi').innerText='x'+multi;document.getElementById('cashBtn').style.display='block';document.getElementById('cashBtn').innerText='CASHOUT ₹'+Math.floor(bet*multi);res.innerText='SAFE x'+multi;}}
+function cashout(){if(!playingMines)return;let winA=Math.floor(bet*multi);bal+=winA;upd();res.innerText='CASHOUT +₹'+winA;res.style.color='#4ade80';playingMines=false;document.getElementById('mainBtn').style.display='block';document.getElementById('cashBtn').style.display='none';hist.unshift({t:'x'+multi,ok:true});finish();}
 let res=document.getElementById('res');
 </script>
 </body>
