@@ -1,25 +1,77 @@
 <!DOCTYPE html>
-<html><body style="background:#111;color:white;text-align:center;font-family:Arial;padding:20px">
-<h2 style="color:#ffcc00">RAJCODE TOSS</h2>
-<h3>Balance: ₹<span id="b">1000</span></h3>
-<div id="c" style="width:120px;height:120px;background:gold;border-radius:50%;margin:30px auto;display:flex;align-items:center;justify-content:center;font-size:50px;color:black">₹</div>
-<button onclick="ch='H'" style="padding:10px 20px;margin:5px">HEAD</button>
-<button onclick="ch='T'" style="padding:10px 20px;margin:5px">TAIL</button>
-<br><br>
-<button onclick="bet=10" style="padding:8px">10</button>
-<button onclick="bet=50" style="padding:8px">50</button>
-<button onclick="bet=100" style="padding:8px">100</button>
-<br><br>
-<button onclick="play()" style="background:gold;padding:15px 40px;border:none;border-radius:10px;font-weight:bold;font-size:18px">TOSS NOW</button>
-<h3 id="r" style="margin-top:20px"></h3>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajcode - Toss Game</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#0a0e13;color:#fff;display:flex;justify-content:center}
+.main{width:100%;max-width:430px;background:#12181f;min-height:100vh;padding:0 0 20px}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:#1a232e;border-bottom:1px solid #222f3e}
+.logo{color:#ffcc00;font-weight:900;letter-spacing:1px}
+.wallet{background:#ffcc00;color:#000;padding:7px 16px;border-radius:25px;font-weight:800;font-size:14px}
+.coin-wrap{padding:30px 0 10px;text-align:center}
+.coin{width:140px;height:140px;margin:0 auto;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ffe566,#ffcc00 40%,#ff9500);display:flex;align-items:center;justify-content:center;font-size:70px;color:#000;font-weight:900;box-shadow:0 0 0 8px #ffcc001a,0 0 40px #ffcc004d;transition:0.3s}
+.coin.spin{animation:flip 0.6s linear 3}
+@keyframes flip{0%{transform:rotateY(0)}100%{transform:rotateY(720deg)}}
+.label{color:#5a6d83;font-size:11px;letter-spacing:1.5px;font-weight:700;margin:22px 0 10px;text-align:center}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 18px}
+.choice{padding:16px;border-radius:14px;border:2px solid #243041;background:#1c2734;color:#8a9bb0;font-weight:800;letter-spacing:1px}
+.choice.on{background:#ffcc0015;border-color:#ffcc00;color:#ffcc00}
+.bets{display:flex;gap:8px;padding:0 18px}
+.bet{flex:1;padding:12px 0;border-radius:12px;background:#1c2734;border:1px solid #243041;color:#8a9bb0;text-align:center;font-weight:700}
+.bet.on{background:#ffcc00;color:#000;border-color:#ffcc00}
+.play-btn{margin:18px 18px 0;width:calc(100% - 36px);background:#ffcc00;color:#000;border:none;padding:17px;border-radius:16px;font-weight:900;font-size:17px;letter-spacing:0.5px}
+.result{text-align:center;font-size:18px;font-weight:800;min-height:26px;margin-top:16px}
+.history{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;padding:12px 18px 0}
+.history span{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px}
+.h-win{background:#16361e;color:#4ade80;border:1px solid #1e6b33}
+.h-lose{background:#3a1a1a;color:#ff7a7a;border:1px solid #6b2424}
+.foot{text-align:center;color:#3a4a5e;font-size:10px;margin-top:24px;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="main">
+<div class="topbar"><div class="logo">RAJCODE</div><div class="wallet">₹ <span id="bal">1000</span></div></div>
+<div class="coin-wrap"><div id="coin" class="coin">₹</div></div>
+<div class="label">CHOOSE SIDE</div>
+<div class="choices">
+<button id="bH" class="choice on" onclick="choose('H')">HEAD</button>
+<button id="bT" class="choice" onclick="choose('T')">TAIL</button>
+</div>
+<div class="label">BET AMOUNT</div>
+<div class="bets">
+<div class="bet on" onclick="setBet(10,this)">₹10</div>
+<div class="bet" onclick="setBet(50,this)">₹50</div>
+<div class="bet" onclick="setBet(100,this)">₹100</div>
+<div class="bet" onclick="setBet(200,this)">₹200</div>
+</div>
+<button class="play-btn" onclick="toss()">TOSS NOW</button>
+<div id="res" class="result"></div>
+<div id="hist" class="history"></div>
+<div class="foot">DEMO ONLY • VIRTUAL COINS • NO REAL MONEY</div>
+</div>
 <script>
-let bal=1000,ch='H',bet=10;
-function play(){
- let win=Math.random()>0.5?'H':'T';
- document.getElementById('c').innerText=win;
- if(win==ch){bal+=bet;document.getElementById('r').innerText='WON ₹'+bet;document.getElementById('r').style.color='lightgreen';}
- else{bal-=bet;document.getElementById('r').innerText='LOST ₹'+bet;document.getElementById('r').style.color='red';}
- document.getElementById('b').innerText=bal;
+let bal=1000,side='H',amt=10,hist=[];
+function choose(s){side=s;document.getElementById('bH').classList.toggle('on',s=='H');document.getElementById('bT').classList.toggle('on',s=='T');}
+function setBet(a,el){amt=a;document.querySelectorAll('.bet').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+function toss(){
+ if(bal<amt){document.getElementById('res').innerHTML="<span style='color:#ff7a7a'>LOW BALANCE</span>";return;}
+ let coin=document.getElementById('coin');let res=document.getElementById('res');
+ coin.classList.add('spin');res.innerText='TOSSING...';res.style.color='#ffcc00';
+ setTimeout(()=>{
+  let win=Math.random()>0.5?'H':'T';
+  coin.classList.remove('spin');
+  coin.innerText=win;
+  hist.unshift({v:win,w:win==side});
+  if(hist.length>18)hist.pop();
+  if(win==side){bal+=amt;res.innerText='WON +₹'+amt;res.style.color='#4ade80';}
+  else{bal-=amt;res.innerText='LOST -₹'+amt;res.style.color='#ff7a7a';}
+  document.getElementById('bal').innerText=bal;
+  document.getElementById('hist').innerHTML=hist.map(h=>`<span class="${h.w?'h-win':'h-lose'}">${h.v}</span>`).join('');
+ },1800);
 }
 </script>
-</body></html>
+</body>
+</html>
