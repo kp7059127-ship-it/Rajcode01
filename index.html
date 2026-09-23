@@ -45,6 +45,7 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
 <p style="color:#aaa;font-size:13px;margin:8px 0">Select karo, jeeto bada!</p>
 <button class="btn" onclick="playGame()">PLAY NOW - ₹10</button>
 </div>
+  <button onclick="spinBonus()" style="width:100%;margin:6px 0;padding:10px;background:#111;border:1px solid #ffcc00;color:#ffcc00;border-radius:20px;font-weight:bold">🎡 Daily Bonus ₹2-₹50</button>
 </div>
 <!-- TEAM SECTION START - Naya Pro Design -->
 <div id="teamSection" style="display:none; padding:12px; background:#fff5f5; min-height:80vh">
@@ -129,6 +130,8 @@ function showGame(){
  let a=prompt("Amount Min 100:");
  if(u && a>=100){alert("Success! ₹"+a+" 24hr me "+u+" pe ayega");}else{alert("Min 100 chahiye");}
 }
+  function spinBonus(){let l=localStorage.getItem('lastSpin');if(l===new Date().toDateString()){alert("Aaj ka bonus le liya! Kal aana");return;}let b=document.getElementById('bonusModal');if(b)b.style.display='flex';else{let w=[2,5,10,20,50][Math.floor(Math.random()*5)];let bal=parseInt(localStorage.getItem('wallet')||1000)+w;localStorage.setItem('wallet',bal);localStorage.setItem('lastSpin',new Date().toDateString());document.getElementById('walletBalance').innerText=bal;alert("🎉 Daily Bonus ₹"+w+" Added!");}}
+function doSpin(){let win=[2,5,10,20,50][Math.floor(Math.random()*5)];document.getElementById('wheel').style.transform='rotate(1440deg)';setTimeout(()=>{let b=parseInt(localStorage.getItem('wallet')||1000)+win;localStorage.setItem('wallet',b);localStorage.setItem('lastSpin',new Date().toDateString());document.getElementById('walletBalance').innerText=b;document.getElementById('bonusText').innerHTML='🎉 Won ₹'+win;},2000);}
 </script>
 <style>
 .khushi-footer-premium{
@@ -174,5 +177,6 @@ function showGame(){
   <span class="name">KHUSHI</span>
   <span>👑</span>
 </div>
+  <div id="bonusModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center"><div style="background:#1a1a1a;border:2px solid #ffcc00;padding:20px;border-radius:20px;text-align:center;width:85%"><div id="wheel" style="font-size:60px;transition:transform 2s">🎡</div><p id="bonusText" style="color:#fff">Spin karke jeeto!</p><button onclick="doSpin()" id="spinBtn" style="background:#ffcc00;border:none;padding:10px 20px;border-radius:20px;font-weight:bold">SPIN NOW</button><br><br><button onclick="document.getElementById('bonusModal').style.display='none'" style="background:none;border:none;color:#888">Close</button></div></div>
 </body>
 </html>
