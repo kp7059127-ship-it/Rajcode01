@@ -36,6 +36,7 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
 <div class="tab" onclick="openDeposit()">💰 ADD</div>
 <div class="tab" onclick="showTeam()">👥 REFER</div>
 <div class="tab" onclick="openWithdraw()">💸 OUT</div>
+<div class="tab" onclick="openHistory()">📜 HISTORY</div>
 </div>
 <div class="card">
 <h3 style="color:#ffcc00">🎯 Play & Win</h3>
@@ -77,7 +78,7 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
   <button onclick="showGame()" style="background:#f0f0f0; border:none; width:100%; padding:12px; border-radius:10px; font-weight:bold; margin-top:8px">← Back to Game</button>
 </div>
 <!-- TEAM SECTION END -->
-
+<div id="historyModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999"><div style="background:#1a1a1a;margin:20% auto;padding:15px;border-radius:15px;width:90%;max-height:60%;overflow-y:auto;border:1px solid #333"><h3 style="color:#ffcc00">💰 Transaction History</h3><div id="historyList" style="font-size:12px;color:#ccc"></div><button onclick="document.getElementById('historyModal').style.display='none'" style="width:100%;margin-top:10px;padding:10px;background:#ffcc00;border:none;border-radius:10px;font-weight:bold">Close</button></div></div>
 <div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:10000;justify-content:center;align-items:center;padding:15px">
 <div style="background:#1e2a35;padding:20px;border-radius:18px;width:100%;max-width:360px;text-align:center;border:1px solid #ffcc00">
 <h2 style="color:#00ff88;margin-bottom:10px">💰 Add Money</h2>
@@ -130,6 +131,8 @@ function showGame(){
  let a=prompt("Amount Min 100:");
  if(u && a>=100){alert("Success! ₹"+a+" 24hr me "+u+" pe ayega");}else{alert("Min 100 chahiye");}
 }
+  function openHistory(){let h=JSON.parse(localStorage.getItem('raj_deposits')||'[]');let list=document.getElementById('historyList');if(h.length==0){list.innerHTML='No transaction yet';}else{list.innerHTML=h.map(x=>`<div style="border-bottom:1px solid #333;padding:6px 0">₹${x.amount} - ${x.utr}</div>`).join('');}document.getElementById('historyModal').style.display='block';}
+  function openHistory(){let h=JSON.parse(localStorage.getItem('raj_deposits')||'[]');let list=document.getElementById('historyList');if(h.length==0){list.innerHTML='No transaction yet';}else{list.innerHTML=h.map(x=>`<div style="border-bottom:1px solid #333;padding:6px 0">₹${x.amount} - ${x.utr}</div>`).join('');}document.getElementById('historyModal').style.display='block';}
   function spinBonus(){let l=localStorage.getItem('lastSpin');if(l===new Date().toDateString()){alert("Aaj ka bonus le liya! Kal aana");return;}let b=document.getElementById('bonusModal');if(b)b.style.display='flex';else{let w=[2,5,10,20,50][Math.floor(Math.random()*5)];let bal=parseInt(localStorage.getItem('wallet')||1000)+w;localStorage.setItem('wallet',bal);localStorage.setItem('lastSpin',new Date().toDateString());document.getElementById('walletBalance').innerText=bal;alert("🎉 Daily Bonus ₹"+w+" Added!");}}
 function doSpin(){let win=[2,5,10,20,50][Math.floor(Math.random()*5)];document.getElementById('wheel').style.transform='rotate(1440deg)';setTimeout(()=>{let b=parseInt(localStorage.getItem('wallet')||1000)+win;localStorage.setItem('wallet',b);localStorage.setItem('lastSpin',new Date().toDateString());document.getElementById('walletBalance').innerText=b;document.getElementById('bonusText').innerHTML='🎉 Won ₹'+win;},2000);}
 </script>
