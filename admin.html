@@ -1,26 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Panel - RajCode01</title>
+<title>RajCode01 - Admin Panel</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-body{background:#111;color:#fff;font-family:Arial;padding:20px}
-.box{background:#222;padding:20px;border-radius:10px;margin-bottom:20px}
-input,button{padding:10px;width:100%;margin:5px 0;border-radius:5px;border:none}
-button{background:#00ff88;font-weight:bold}
-.card{background:#333;padding:10px;margin:10px 0;border-radius:8px}
-img{max-width:100%;border-radius:8px}
+body{background:#0a0a0a;color:#fff;font-family:Arial;padding:15px}
+.header{display:flex;justify-content:space-between;align-items:center}
+.card{background:#1e1e1e;padding:15px;border-radius:12px;margin:15px 0;border-left:4px solid #00ff88}
+img.ss{width:100%;max-width:300px;border-radius:10px;margin:10px 0;border:2px solid #333}
+.btn{padding:10px 15px;border:none;border-radius:8px;font-weight:bold;margin:5px;cursor:pointer}
+.approve{background:#00ff88;color:#000}
+.reject{background:#ff3b3b;color:#fff}
+small{color:#aaa}
 </style>
 </head>
 <body>
+<div class="header">
 <h1>🔥 RajCode01 Admin</h1>
-<div class="box">
-<h3>Deposit Requests</h3>
-<div id="list">Loading...</div>
+<button onclick="clearAll()" style="background:#333;color:#fff;padding:8px 12px;border-radius:8px">Clear All</button>
 </div>
+<p>Live Deposit Requests: <b id="count">0</b></p>
+<div id="list"></div>
+
 <script>
-// Firebase se data ayega yaha - pehle admin.html bana le
-document.getElementById('list').innerHTML = "File ban gayi! Ab bata, Firebase lagana hai kya?";
+function loadDeposits(){
+ let deposits = JSON.parse(localStorage.getItem('raj_deposits') || '[]');
+ document.getElementById('count').innerText = deposits.length;
+ let html = "";
+ if(deposits.length==0) html = "<p style='color:#777'>Koi deposit request nahi hai abhi</p>";
+ deposits.reverse().forEach((d,i)=>{
+   html+=`<div class="card">
+   <b>Amount: ₹${d.amount}</b><br>
+   <small>UTR: ${d.utr} | User: ${d.user} | ${d.time}</small><br>
+   ${d.screenshot? `<img class="ss" src="${d.screenshot}">` : '<p>No Screenshot</p>'}
+   <br>
+   <button class="btn approve" onclick="approve(${deposits.length-1-i})">✅ Approve</button>
+   <button class="btn reject" onclick="reject(${deposits.length-1-i})">❌ Reject</button>
+   </div>`;
+ });
+ document.getElementById('list').innerHTML = html;
+}
+
+function approve(index){
+ let deposits = JSON.parse(localStorage.getItem('raj_deposits') || '[]');
+ let dep = deposits[index];
+ let users = JSON.parse(localStorage.getItem('raj_users') || '{}');
+ if(!users[dep.user]) users[dep.user]=0;
+ users[dep.user] = parseInt(users[dep.user]) + parseInt(dep.amount);
+ localStorage.setItem('raj_users', JSON.stringify(users));
+ deposits.splice(index,1);
+ localStorage.setItem('raj_deposits', JSON.stringify(deposits));
+ alert('Approved ₹'+dep.amount+' to '+dep.user);
+ loadDeposits();
+}
+
+function reject(index){
+ let deposits = JSON.parse(localStorage.getItem('raj_deposits') || '[]');
+ deposits.splice(index,1);
+ localStorage.setItem('raj_deposits', JSON.stringify(deposits));
+ loadDeposits();
+}
+
+function clearAll(){
+ if(confirm('Sab delete karna hai?')){ localStorage.removeItem('raj_deposits'); loadDeposits(); }
+}
+
+loadDeposits();
+setInterval(loadDeposits,2000);
 </script>
 </body>
 </html>
