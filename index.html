@@ -110,60 +110,49 @@ function showGame(){
  if(u && a>=100){alert("Success! ₹"+a+" 24hr me "+u+" pe ayega");}else{alert("Min 100 chahiye");}
 }
 </script>
-  <style>
-.khushi-footer{
-  text-align:center;
-  margin-top:40px;
-  padding:20px;
-  background: linear-gradient(180deg, transparent, rgba(255,204,0,0.06));
-  border-top: 1px solid rgba(255,204,0,0.15);
+<style>
+.khushi-footer-premium{
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15,15,15,0.95);
+  border: 1px solid rgba(255,204,0,0.4);
+  padding: 8px 18px;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 15px rgba(255,204,0,0.2);
+  backdrop-filter: blur(10px);
 }
-.khushi-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background: radial-gradient(circle at top, #1e1e1e, #0a0a0a);
-  border:1px solid rgba(255,204,0,0.35);
-  padding:8px 20px;
-  border-radius:30px;
-  box-shadow: 0 0 20px rgba(255,204,0,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+.khushi-footer-premium .pwr{
+  color: #888;
+  font-size: 10px;
+  letter-spacing: 1.5px;
 }
-.khushi-badge span:first-child{
-  color:#777;
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-.khushi-name{
-  background: linear-gradient(90deg, #ffcc00, #ffb700, #ff8a00);
+.khushi-footer-premium .name{
+  background: linear-gradient(90deg, #ffcc00, #ff9900);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-weight:900;
-  font-size:14px;
-  letter-spacing:0.8px;
+  font-weight: 900;
+  font-size: 13px;
 }
-.khushi-heart{
-  animation: beat 1.2s infinite;
-  filter: drop-shadow(0 0 5px gold);
+.khushi-footer-premium .heart{
+  animation: khushiBeat 1.2s infinite;
 }
-.khushi-crown{
-  font-size:14px;
-  margin-left:2px;
-  filter: drop-shadow(0 0 6px gold);
-}
-@keyframes beat{
+@keyframes khushiBeat{
   0%,100%{transform:scale(1)}
-  50%{transform:scale(1.25)}
+  50%{transform:scale(1.3)}
 }
 </style>
 
-<div class="khushi-footer">
-  <div class="khushi-badge">
-    <span>Powered by</span>
-    <span class="khushi-heart">💛</span>
-    <span class="khushi-name">KHUSHI</span>
-    <span class="khushi-crown">👑</span>
-  </div>
+<div class="khushi-footer-premium">
+  <span class="pwr">POWERED BY</span>
+  <span class="heart">💛</span>
+  <span class="name">KHUSHI</span>
+  <span>👑</span>
 </div>
 </body>
 </html>
