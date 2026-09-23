@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel - RajCode</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{background:#111;color:#fff;font-family:sans-serif;padding:15px} .card{background:#222;padding:15px;margin:10px 0;border-radius:10px} button{padding:8px 15px;border:0;border-radius:5px;margin:5px;font-weight:bold} .approve{background:#00ff88} .reject{background:#ff4444;color:#fff} input{padding:8px;width:80px}</style>
+</head>
+<body>
+<h2>👑 RAJCODE ADMIN PANEL</h2>
+<div id="list">Loading...</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getFirestore, collection, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "rajcode01-8bd07.firebaseapp.com",
+  projectId: "rajcode01-8bd07",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function load(){
+  const snap = await getDocs(collection(db,"users"));
+  let html="";
+  snap.forEach(d=>{
+    let u=d.data();
+    html+=`<div class="card">
+    <b>${u.email}</b> - ₹${u.balance||0}<br>
+    <input id="amt-${d.id}" placeholder="Amount">
+    <button class="approve" onclick="addBal('${d.id}')">+ Add</button>
+    <button class="reject" onclick="cutBal('${d.id}')">- Cut</button>
+    </div>`;
+  });
+  document.getElementById("list").innerHTML=html;
+}
+window.addBal=async(id)=>{
+  let amt=parseInt(document.getElementById("amt-"+id).value);
+  let ref=doc(db,"users",id);
+  // simple logic - will add in real
+  alert("₹"+amt+" Added to "+id+" - Firestore me manually update karo abhi");
+}
+load();
+</script>
+</body>
+</html>
