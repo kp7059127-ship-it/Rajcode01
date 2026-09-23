@@ -206,6 +206,40 @@ function saveDeposit(amount, utr, screenshot){
  document.getElementById('depositModal').style.display='none';
 }
 </script>
+  <div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;justify-content:center;align-items:center">
+<div style="background:#1e1e1e;padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center">
+<h2 style="color:#00ff88">💰 Add Money</h2>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=demo@upi" style="width:200px;margin:10px auto;background:#fff;padding:10px;border-radius:10px">
+<p style="color:#aaa;font-size:13px">UPI ID: demo@upi</p>
+<input id="depAmount" type="number" placeholder="Amount" style="width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none;background:#333;color:#fff">
+<input id="depUtr" type="text" placeholder="UTR (12 digit)" style="width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none;background:#333;color:#fff">
+<input id="depScreenshot" type="file" accept="image/*" style="width:100%;padding:8px;color:#fff">
+<button onclick="submitDeposit()" style="width:100%;padding:12px;background:#00ff88;border:none;border-radius:8px;font-weight:bold;margin-top:10px">Submit</button>
+<button onclick="document.getElementById('depositModal').style.display='none'" style="width:100%;padding:10px;background:#333;color:#fff;border:none;border-radius:8px;margin-top:8px">Cancel</button>
+</div>
+</div>
+<div style="position:fixed;top:10px;right:10px;z-index:9999;background:#111;padding:8px 12px;border-radius:20px;border:1px solid #00ff88">
+<span style="color:#fff">₹<span id="walletBalance">0</span></span>
+<button onclick="openDeposit()" style="background:#00ff88;border:none;padding:6px 12px;border-radius:15px;font-weight:bold;margin-left:5px">+ Add</button>
+</div>
+<script>
+function openDeposit(){document.getElementById('depositModal').style.display='flex';}
+function submitDeposit(){
+ const a=document.getElementById('depAmount').value;
+ const u=document.getElementById('depUtr').value;
+ const f=document.getElementById('depScreenshot');
+ if(!a||!u){alert('Amount aur UTR bharo');return;}
+ if(f.files[0]){
+  const r=new FileReader();r.onload=function(e){saveDep(a,u,e.target.result)};r.readAsDataURL(f.files[0]);
+ }else{saveDep(a,u,'');}
+}
+function saveDep(amount,utr,ss){
+ let d=JSON.parse(localStorage.getItem('raj_deposits')||'[]');
+ d.push({amount,utr,screenshot:ss,user:localStorage.getItem('username')||'Guest',time:new Date().toLocaleString()});
+ localStorage.setItem('raj_deposits',JSON.stringify(d));
+ alert('Request Sent!');document.getElementById('depositModal').style.display='none';
+}
+</script>
   
 </body>
 </html>
