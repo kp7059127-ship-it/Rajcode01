@@ -18,7 +18,7 @@ body{background:#0a0e13;color:#fff;display:flex;justify-content:center;padding:1
 .card{background:#1c2731;padding:12px;border-radius:12px;margin:10px 0;border:1px solid #222}
 .btn{width:100%;padding:13px;background:#ffcc00;color:#000;border:none;border-radius:10px;font-weight:bold;margin-top:8px;cursor:pointer}
 .inp{width:100%;padding:12px;background:#000;border:1px solid #333;color:#fff;border-radius:8px;margin:6px 0}
-div[style*="ffe8e1"] *{color:#000 !important; font-weight:bold !important}
+#teamSection div[style*="background"] *{color:#000 !important; font-weight:bold !important}
 </style>
 </head>
 <body>
@@ -31,7 +31,7 @@ div[style*="ffe8e1"] *{color:#000 !important; font-weight:bold !important}
 <div class="tab on">🎮 GAME</div>
 <div class="tab" onclick="openDeposit()">💰 ADD</div>
 <div class="tab" onclick="showTeam()">👥 REFER</div>
-<div class="tab">💸 OUT</div>
+<div class="tab" onclick="openWithdraw()">💸 OUT</div>
 </div>
 <div class="card">
 <h3 style="color:#ffcc00">🎯 Play & Win</h3>
@@ -103,6 +103,11 @@ function showGame(){
   document.getElementById('teamSection').style.display='none';
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   event.target.classList.add('on');
+}
+  function openWithdraw(){
+ let u=prompt("UPI ID daalo:");
+ let a=prompt("Amount Min 100:");
+ if(u && a>=100){alert("Success! ₹"+a+" 24hr me "+u+" pe ayega");}else{alert("Min 100 chahiye");}
 }
 </script>
 </body>
