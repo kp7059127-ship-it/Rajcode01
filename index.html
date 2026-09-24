@@ -127,3 +127,31 @@ body{background:#0a0e13;color:#fff;display:flex;flex-direction:column;align-item
 <!-- MODALS - SAME OLD -->
 <div id="historyModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999"><div style="background:#1a1a1a;margin:20% auto;padding:15px;border-radius:15px;width:90%;max-width:400px"><h3 style="color:#ffcc00">💰 History</h3><div id="historyList" style="font-size:12px;color:#ccc"></div><button onclick="document.getElementById('historyModal').style.display='none'" style="width:100%;margin-top:10px;padding:10px;background:#ffcc00;border:none;border-radius:10px;font-weight:bold">Close</button></div></div>
 <div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:10000;justify-content:center;align-items:center;padding:15px"><div style="background:#1e2a35;padding:20px;border-radius:18px;width:100%;max-width:360px;text-align:center;border:1px solid #ffcc00"><h2 style="color:#00ff88">💰 Add Money</h2><input id="depAmount" type="number" placeholder="Amount" style="width:100%;padding:12px;background:#000;border:1px solid #333;color:#fff;border-radius:8px;margin:6px 0"><input id="depUtr" type="text" placeholder="UTR" style="width:100%;padding:12px;background:#000;border:1px solid
+</div>
+</div>
+
+<script>
+function handleBet(){
+  document.querySelector('.box').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>{ openDeposit(); }, 600);
+}
+let bal=parseInt(localStorage.getItem('wallet')||'1000');
+document.getElementById('walletBalance').innerText=bal;
+function openDeposit(){ document.getElementById('depositModal').style.display='flex'; }
+function closeDeposit(){ document.getElementById('depositModal').style.display='none'; }
+function playGame(){
+  if(bal<10){ openDeposit(); return; }
+  bal-=10;
+  let res=Math.random()>0.5?'HEAD':'TAIL';
+  document.getElementById('resultText').innerText=res;
+  if(Math.random()>0.5){ bal+=18; }
+  localStorage.setItem('wallet',bal);
+  document.getElementById('walletBalance').innerText=bal;
+}
+function showTeam(){ alert('Refer & Earn - Coming Soon'); }
+function openWithdraw(){ alert('Withdraw - Coming Soon'); }
+function openHistory(){ document.getElementById('historyModal').style.display='flex'; }
+function spinBonus(){ alert('Bonus Spin!'); }
+</script>
+</body>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           </html>
