@@ -26,6 +26,11 @@ body{background:#0a0e13;color:#fff;display:flex;flex-direction:column;align-item
 </style>
   <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/icon-192.png">
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
 </head>
 <body>
 
