@@ -139,7 +139,7 @@ let bal=parseInt(localStorage.getItem('wallet')||'1000');
 document.getElementById('walletBalance').innerText=bal;
 function openDeposit(){ document.getElementById('depositModal').style.display='flex'; }
 function closeDeposit(){ document.getElementById('depositModal').style.display='none'; }
-  function downloadApp(){ window.open('https://t.me/rajcode', '_blank'); }
+ function downloadApp(){ window.open('https://play.google.com/store/apps/details?id=com.rajcode', '_blank'); } 
 function playGame(){
   if(bal<10){ openDeposit(); return; }
   bal-=10;
