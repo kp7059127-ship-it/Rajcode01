@@ -3,92 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KING TOSS BOOK x RAJCODE - FINAL</title>
+<title>RAJCODE - KING TOSS FINAL</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#fef5f7;color:#000}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
-
-/* KING TOSS NEW HEADER */
-.kt-header{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;background:white;margin:10px;border-radius:18px;box-shadow:0 2px 10px rgba(0,0,0,0.06)}
-.kt-logo{width:50px;height:50px;background:#0a1931;border-radius:50%;display:flex;align-items:center;justify-content:center;color:gold;font-weight:900;border:2px solid gold;font-size:22px}
-.kt-btns{display:flex;gap:8px;align-items:center}
-.kt-login{border:1.5px solid #7a0000;color:#7a0000;padding:7px 16px;border-radius:20px;background:white;font-weight:bold}
-.kt-reg{background:#7a0000;color:white;padding:8px 18px;border-radius:20px;border:none;font-weight:bold}
-.kt-menu{background:#7a0000;color:white;width:38px;height:38px;border-radius:50%;border:none;font-size:18px}
-
-/* BANNER */
-.kt-banner{margin:12px;background:#0a0a0a;border-radius:14px;padding:14px;border:1.5px solid #c9a227}
-.kt-rules{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
-.kt-rule{background:#141414;border:1px solid #222;padding:7px;border-radius:8px;font-size:10px;color:#aaa}
-.kt-rule b{color:gold;display:block;font-size:11px;margin-bottom:2px}
-
-/* MATCH CARD */
-.kt-match{background:white;margin:12px;border-radius:18px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.08)}
-.kt-match-top{background:#7a0000;color:white;padding:12px;text-align:center}
-.kt-teams{display:flex;justify-content:space-around;align-items:center;padding:18px}
-.kt-flag{width:65px;height:65px;border-radius:50%;background:white;box-shadow:0 3px 10px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;font-size:28px}
-.kt-vs{border:1px solid #eee;padding:6px 12px;border-radius:8px;font-weight:900;color:#7a0000;font-size:13px}
-.kt-bet{background:#7a0000;color:white;width:92%;margin:12px auto;display:block;padding:14px;border-radius:12px;border:none;font-weight:bold;font-size:15px}
-
-/* OLD RAJCODE GAME CSS - SAME */
-.box{width:100%;max-width:440px;background:#111a22;border-radius:20px;padding:15px;border:1px solid #222;margin:15px auto;display:block}
+body{background:#0a0e13;color:#fff;display:flex;flex-direction:column;align-items:center;padding:0 10px 0 10px;min-height:100vh}
+.box{width:100%;max-width:440px;background:#111a22;border-radius:20px;padding:15px;border:1px solid #222;margin:12px 0}
 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.logo{color:#ffcc00;font-weight:bold;font-size:22px}
 .wal{background:#ffcc00;color:#000;padding:7px 14px;border-radius:20px;font-weight:bold;display:flex;align-items:center;gap:8px}
 .wal button{background:#000;color:#ffcc00;border:none;padding:5px 12px;border-radius:15px;font-weight:bold}
 .tabs{display:flex;gap:5px;background:#000;padding:5px;border-radius:12px;margin:10px 0}
-.tab{flex:1;min-width:55px;padding:9px 5px;text-align:center;background:#1c2731;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;color:#fff}
+.tab{flex:1;padding:9px 5px;text-align:center;background:#1c2731;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;color:#fff}
 .tab.on{background:#ffcc00;color:#000}
 .card{background:#1c2731;padding:12px;border-radius:12px;margin:10px 0;border:1px solid #222}
 .btn{width:100%;padding:13px;background:#ffcc00;color:#000;border:none;border-radius:10px;font-weight:bold;margin-top:8px;cursor:pointer}
-.inp{width:100%;padding:12px;background:#000;border:1px solid #333;color:#fff;border-radius:8px;margin:6px 0}
-.tutorial{background:white;margin:15px;padding:20px;border-radius:20px;box-shadow:0 4px 15px rgba(0,0,0,0.06)}
+.kt-match{background:white;margin:12px auto;border-radius:18px;overflow:hidden;max-width:440px;width:100%}
+.kt-match-top{background:#7a0000;color:white;padding:12px;text-align:center}
+.kt-teams{display:flex;justify-content:space-around;align-items:center;padding:18px;background:white}
+.kt-flag{width:85px;height:85px;border-radius:50%;background:white;box-shadow:0 3px 12px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:42px}
+.kt-vs{padding:6px 12px;border-radius:8px;font-weight:900;color:#7a0000;font-size:13px;background:white;border:1px solid #eee}
+.kt-bet{background:#7a0000;color:white;width:92%;margin:12px auto;display:block;padding:14px;border-radius:12px;border:none;font-weight:bold}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 </style>
 </head>
 <body>
 
-<div style="background:#ffcc00;color:#000;white-space:nowrap;overflow:hidden;padding:6px 0;font-size:12px;font-weight:bold;position:sticky;top:0;z-index:9999">
-<span style="display:inline-block;animation:scroll 25s linear infinite;padding-left:100%" id="ticker">🔥 Aman ne ₹50 jeeta • Khushi ne ₹100 jeeta • Raj ne ₹20 jeeta • Refer karke ₹10 kamao • Daily Bonus Live •</span>
+<div style="background:#ffcc00;color:#000;white-space:nowrap;overflow:hidden;padding:6px 0;font-size:12px;font-weight:bold;position:sticky;top:0;z-index:99;width:100%;max-width:440px;border-radius:0 0 10px 10px">
+<span style="display:inline-block;animation:scroll 25s linear infinite;padding-left:100%">🔥 Aman ne ₹50 jeeta • Khushi ne ₹100 jeeta • Raj ne ₹20 jeeta • Refer karke ₹10 kamao •</span>
 </div>
 
-<!-- NAYA KING TOSS HEADER -->
-<div class="kt-header">
-  <div style="display:flex;align-items:center;gap:10px"><div class="kt-logo">K</div><div style="font-weight:900;line-height:1.1;color:#0a1931">KING TOSS<br>BOOK</div></div>
-  <div class="kt-btns">
-    <button class="kt-login">Login</button>
-    <button class="kt-reg">Register</button>
-    <button class="kt-menu">☰</button>
-  </div>
-</div>
-
-<!-- WITHDRAWAL RULES -->
-<div class="kt-banner">
-  <h3 style="color:white">👑 KING <span style="color:gold">WITHDRAWAL RULES</span></h3>
-  <div class="kt-rules">
-    <div class="kt-rule"><b>01 TIMINGS</b>12PM to 11:30PM</div>
-    <div class="kt-rule"><b>02 WALLET</b>Main Wallet Only</div>
-    <div class="kt-rule"><b>03 SAME BANK</b>Deposit & Withdraw Same</div>
-    <div class="kt-rule"><b>04 LIMIT</b>₹50,000/day</div>
-  </div>
-</div>
-
-<!-- MATCH CARD -->
+<!-- CARD 1 -->
 <div class="kt-match">
-  <div class="kt-match-top"><h3>HONG KONG VS MALAYSIA</h3><p style="font-size:10px;opacity:0.8;margin-top:4px">ASIAN GAMES 10:30 AM - TAP TO PLAY RAJ WHEEL BELOW</p></div>
-  <div class="kt-teams">
-    <div style="text-align:center"><div class="kt-flag">🇭🇰</div><div style="font-weight:bold;font-size:13px;margin-top:6px;color:#0a1931">Hong Kong</div></div>
-    <div class="kt-vs">VS</div>
-    <div style="text-align:center"><div class="kt-flag">🇲🇾</div><div style="font-weight:bold;font-size:13px;margin-top:6px;color:#0a1931">Malaysia</div></div>
-  </div>
-  <button class="kt-bet" onclick="document.getElementById('rajgamebox').scrollIntoView({behavior:'smooth'})">Login To Bet ➔ Play RAJ WHEEL</button>
-  <div style="height:8px"></div>
+<div class="kt-match-top"><h3>HONG KONG VS MALAYSIA</h3><p style="font-size:10px;opacity:0.8;margin-top:4px">ASIAN GAMES 10:30 AM</p></div>
+<div class="kt-teams">
+<div style="text-align:center"><div class="kt-flag">🇭🇰</div><div style="font-weight:900;font-size:14px;margin-top:8px;color:#0a1931">Hong Kong</div></div>
+<div class="kt-vs">VS</div>
+<div style="text-align:center"><div class="kt-flag">🇲🇾</div><div style="font-weight:900;font-size:14px;margin-top:8px;color:#0a1931">Malaysia</div></div>
+</div>
+<button class="kt-bet">Login To Bet ➔</button>
 </div>
 
-<!-- TUMHARA PURANA RAJCODE GAME - KUCH DELETE NAHI HUA -->
-<div id="rajgamebox" class="box">
+<!-- CARD 2 - INDIA PAK -->
+<div class="kt-match">
+<div class="kt-match-top" style="background:#0a1931"><h3>INDIA VS PAKISTAN</h3><p style="font-size:10px;opacity:0.8;margin-top:4px">ASIA CUP FINAL - TODAY 7:30 PM</p></div>
+<div class="kt-teams">
+<div style="text-align:center"><div class="kt-flag" style="border:3px solid #ff9933">🇮🇳</div><div style="font-weight:900;font-size:15px;margin-top:8px;color:#0a1931">India</div></div>
+<div class="kt-vs" style="background:#ffcc00;color:#000;border:none">VS</div>
+<div style="text-align:center"><div class="kt-flag" style="border:3px solid #01411c">🇵🇰</div><div style="font-weight:900;font-size:15px;margin-top:8px;color:#0a1931">Pakistan</div></div>
+</div>
+<button class="kt-bet" style="background:linear-gradient(90deg,#0a1931,#7a0000)">Login To Bet ➔ IND vs PAK</button>
+</div>
+
+<!-- RAJCODE GAME -->
+<div class="box">
 <div class="top">
-<div class="logo" style="display:flex;align-items:center;gap:8px"><div style="height:38px;width:38px;border-radius:50%;border:2px solid #ffcc00;background:linear-gradient(135deg,#ffcc00,#ff9900);display:flex;align-items:center;justify-content:center;font-size:20px">👑</div> <span style="color:#ffcc00;font-weight:bold;font-size:20px">RAJCODE</span></div>
+<div style="display:flex;align-items:center;gap:8px"><div style="height:38px;width:38px;border-radius:50%;border:2px solid #ffcc00;background:linear-gradient(135deg,#ffcc00,#ff9900);display:flex;align-items:center;justify-content:center;font-size:20px">👑</div><span style="color:#ffcc00;font-weight:bold;font-size:20px">RAJCODE</span></div>
 <div class="wal">₹<span id="walletBalance">1000</span> <button onclick="openDeposit()">+ ADD</button></div>
 </div>
 <div class="tabs">
@@ -99,126 +67,63 @@ body{background:#fef5f7;color:#000}
 <div class="tab" onclick="openHistory()">📜 HISTORY</div>
 </div>
 <div class="card">
-  <div style="background:#111;border:1px solid #ffcc00;border-radius:10px;padding:8px 12px;margin-bottom:12px;overflow:hidden;white-space:nowrap;font-size:12px;color:#00ff88">💸 <marquee>Rahul ne ₹500 withdraw kiya | Aman ne ₹50 jeeta | Khushi ne ₹1000 add kiya | Live users: 1,247</marquee></div>
+<div style="background:#111;border:1px solid #ffcc00;border-radius:10px;padding:8px 12px;margin-bottom:12px;overflow:hidden;white-space:nowrap;font-size:12px;color:#00ff88"><marquee>Rahul ne ₹500 withdraw kiya | Aman ne ₹50 jeeta | Khushi ne ₹1000 add kiya | Live users: 1,247</marquee></div>
 <h3 style="color:#ffcc00">🎯 Play & Win</h3>
-  <div id="coin" style="width:85px;height:85px;margin:10px auto;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ffd700,#b8860b);display:flex;align-items:center;justify-content:center;font-size:38px;transition:transform 1s;box-shadow:0 0 25px rgba(255,204,0,0.5)">🪙</div>
+<div id="coin" style="width:85px;height:85px;margin:10px auto;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ffd700,#b8860b);display:flex;align-items:center;justify-content:center;font-size:38px;transition:transform 1s">🪙</div>
 <p id="resultText" style="text-align:center;color:#ffcc00;font-weight:bold;height:18px;font-size:13px"></p>
-<audio id="coinSound" src="https://assets.mixkit.co/sfx/preview/mixkit-coin-win-notification-1992.mp3"></audio>
-<p style="color:#aaa;font-size:13px;margin:8px 0">Select karo, jeeto bada!</p>
 <button class="btn" onclick="playGame()">PLAY NOW - ₹10</button>
 </div>
-  <button onclick="spinBonus()" style="width:100%;margin:6px 0;padding:10px;background:#111;border:1px solid #ffcc00;color:#ffcc00;border-radius:20px;font-weight:bold">🎡 Daily Bonus ₹2-₹50</button>
+<button onclick="spinBonus()" style="width:100%;margin:6px 0;padding:10px;background:#111;border:1px solid #ffcc00;color:#ffcc00;border-radius:20px;font-weight:bold">🎡 Daily Bonus ₹2-₹50</button>
 </div>
 
-<!-- TEAM SECTION -->
-<div id="teamSection" style="display:none; padding:12px; background:#0a0a13; max-width:440px; margin:0 auto; border-radius:20px">
-  <div style="background:#111;border:1px solid #ffcc00;border-radius:14px;padding:14px;box-shadow:0 0 15px rgba(255,204,0,0.15)">
- <b style="color:#ffcc00;font-size:16px">💰 My Team & Earning</b>
- <p style="font-size:11px;color:#aaa;margin:4px 0 10px 0">Invite Friends & Get Lifetime Commission 10%</p>
- <div style="display:flex;justify-content:space-between;text-align:center;margin-top:12px;gap:8px">
-  <div style="flex:1;background:#1f1f1f;border:1px solid #333;padding:8px;border-radius:8px"><small style="color:#aaa;font-size:10px">TOTAL TEAM</small><br><b style="color:#ffcc00;font-size:16px">0</b></div>
-  <div style="flex:1;background:#1f1f1f;border:1px solid #333;padding:8px;border-radius:8px"><small style="color:#aaa;font-size:10px">TODAY INCOME</small><br><b style="color:#00ff88;font-size:16px">₹0</b></div>
-  <div style="flex:1;background:#1f1f1f;border:1px solid #333;padding:8px;border-radius:8px"><small style="color:#aaa;font-size:10px">TOTAL INCOME</small><br><b style="color:#00ff88;font-size:16px">₹0</b></div>
- </div>
- <div style="background:#fff;margin-top:14px;padding:12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center">
-  <small style="color:#777;font-size:10px;font-weight:bold">YOUR REFER LINK<br><b style="font-size:11px;color:#000;word-break:break-all">https://rajcode01.vercel.app?ref=RAJ123</b></small>
-  <button onclick="navigator.clipboard.writeText('https://rajcode01.vercel.app?ref=RAJ123');alert('Link Copied!')" style="background:#ffcc00;border:none;padding:8px 12px;border-radius:8px;font-weight:bold">COPY</button>
- </div>
- <button onclick="window.open('https://wa.me/?text=Join RAJCODE01 - Toss Win & Earn 10% Commission https://rajcode01.vercel.app?ref=RAJ123','_blank')" style="background:#25D366;color:white;border:none;width:100%;padding:12px;border-radius:10px;font-weight:bold;margin-top:12px;font-size:14px">📲 WhatsApp pe Share Karo</button>
- <button onclick="showGame()" style="background:#f0f0f0;border:none;width:100%;padding:12px;border-radius:10px;font-weight:bold;margin-top:8px">Back to Game</button>
+<!-- DOWNLOAD APP -->
+<div style="background:#fef5f7;width:100%;max-width:440px;padding:45px 20px;text-align:center;border-radius:20px;margin:12px 0;color:#000">
+<h2 style="font-size:32px;font-weight:900;color:#0f172a">Download our app</h2>
+<p style="color:#64748b;font-size:14px;margin:14px auto;max-width:340px;line-height:1.5">Predict you love anywhere, on any device with stream app. included at no additional cost, exclusively for Betting customers.</p>
+<button style="background:#7a0000;color:white;border:none;padding:16px 36px;border-radius:14px;font-weight:900;margin-top:18px;font-size:16px">DOWNLOAD NOW ⬇</button>
+<div style="margin-top:28px;background:white;border-radius:24px;padding:12px;box-shadow:0 15px 40px rgba(0,0,0,0.12)"><div style="background:#0a0a0a;border-radius:18px;padding:14px;color:white;text-align:left"><div style="font-size:10px;color:#ffcc00">LIVE NOW: CRICKET</div><div style="display:flex;justify-content:space-between;margin:10px 0;font-size:13px"><span>🇮🇳 India 1.65</span><span>🇦🇺 Aus 2.25</span></div><div style="background:#1a1a1a;border-radius:8px;padding:8px;font-size:10px">MATCH WINNER • TOP BATSMAN • NEXT WICKET</div></div></div>
+</div>
+
+<!-- FOOTER - BILKUL LAST ME - SCREENSHOT JAISA -->
+<div style="background:#2a0a18;width:100%;max-width:440px;border-radius:32px 32px 0 0;padding:28px 20px 20px 20px;margin-top:10px;color:#c9a0b0">
+<div style="display:flex;gap:14px">
+<div style="width:80px;height:80px;background:#0a0a0a;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid #3a1a2a"><div style="text-align:center"><div style="font-size:22px">👑</div><div style="font-weight:900;color:gold;font-size:12px">KING</div><div style="font-size:6px;color:white">TOSS BOOK</div></div></div>
+<p style="font-size:12.5px;line-height:1.6;color:#b88da0">King Toss Book is your ultimate destination for online toss prediction. Experience premium toss markets from leading cricket tournaments worldwide, backed by secure transactions, fast settlements, and a platform made for winners.</p>
+</div>
+<div style="display:flex;gap:16px;margin-top:20px;font-size:20px;color:white"><span>f</span><span>◎</span><span>✈</span></div>
+
+<div style="display:flex;justify-content:space-between;margin-top:26px">
+<div><h3 style="color:white;font-size:16px;font-weight:900;margin-bottom:10px">Key Links</h3><div style="font-size:12px;line-height:2.4;color:#b88da0"><div>Live Bets</div><div>Blogs</div><div>New Events</div><div>Withdrawal Proof</div></div></div>
+<div><h3 style="color:white;font-size:16px;font-weight:900;margin-bottom:10px">Company</h3><div style="font-size:12px;line-height:2.4;color:#b88da0"><div>About Us</div><div>Rules</div><div>Testimonials</div><div>Contact Us</div></div></div>
+</div>
+
+<div style="border-top:1px solid #4a1a30;margin-top:22px;padding-top:20px">
+<h3 style="color:white;text-align:center;font-size:18px;font-weight:900">Payment Methods</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px">
+<div style="background:white;border-radius:10px;padding:11px;text-align:center;font-weight:900;color:#ff6a00;font-style:italic;font-size:12px">BHIM</div>
+<div style="background:white;border-radius:10px;padding:11px;text-align:center;font-weight:900;color:#0a8a30;font-style:italic;font-size:12px">UPI</div>
+<div style="background:white;border-radius:10px;padding:11px;text-align:center;font-weight:900;color:#5a2bb5;font-size:11px">PhonePe</div>
+<div style="background:white;border-radius:10px;padding:11px;text-align:center;font-weight:900;color:#003a8a;font-size:12px">Paytm</div>
+<div style="background:white;border-radius:10px;padding:11px;text-align:center;font-weight:900;color:#222;font-size:12px"><span style="color:#4285f4">G</span> Pay</div>
+<div style="background:white;border-radius:10px;padding:11px;text-align:center;font-weight:900;color:#222;font-size:11px">🏦 Bank</div>
 </div>
 </div>
 
-<!-- TUTORIAL VIDEOS - KING TOSS STYLE -->
-<div class="tutorial">
-  <h2 style="color:#7a0000">Tutorial Videos</h2>
-  <div style="display:flex;gap:12px;margin-top:18px;align-items:center">
-    <div style="width:55px;height:55px;background:#f5f5f5;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#7a0000;font-size:22px">▶️</div>
-    <div><h3 style="font-size:15px">Registration, Login & Password</h3><p style="font-size:11px;color:#666">Learn registration, login...</p></div>
-  </div>
-  <div style="display:flex;gap:12px;margin-top:18px;align-items:center">
-    <div style="width:55px;height:55px;background:#f5f5f5;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#7a0000;font-size:22px">▶️</div>
-    <div><h3 style="font-size:15px">Deposit & Withdrawal</h3><p style="font-size:11px;color:#666">Deposit funds, withdraw...</p></div>
-  </div>
+<div style="margin-top:24px">
+<h3 style="color:white;text-align:center;font-size:18px;font-weight:900">Game Therapy</h3>
+<div style="display:flex;justify-content:center;gap:12px;margin-top:14px">
+<div style="width:52px;height:52px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#e53935;font-weight:900;border:2px solid #e53935;font-size:14px">18+</div>
+<div style="width:52px;height:52px;background:#111;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:10px;text-align:center;line-height:1.1">GAM<br>CARE</div>
+<div style="width:52px;height:52px;background:#222;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900">at</div>
+</div>
 </div>
 
-<div style="text-align:center; padding:25px 10px; background:#111; border-top:2px solid gold; margin-top:15px;">
-  <div style="font-size:11px; color:#888; letter-spacing:2px;">POWERED BY</div>
-  <div style="font-size:22px; font-weight:900; background:linear-gradient(90deg,#FFD700,#FF8C00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-top:5px;">💛 KHUSHI 👑</div>
+<div style="text-align:center;margin-top:26px;padding:16px;background:#111;border-top:2px solid gold;border-radius:12px">
+<div style="font-size:10px;color:#888;letter-spacing:2px">POWERED BY</div>
+<div style="font-size:20px;font-weight:900;color:gold;margin-top:4px">💛 KHUSHI 👑</div>
+</div>
 </div>
 
-<!-- MODALS SAME AS OLD -->
-<div id="historyModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999"><div style="background:#1a1a1a;margin:20% auto;padding:15px;border-radius:15px;width:90%;max-height:60%;overflow-y:auto;border:1px solid #333"><h3 style="color:#ffcc00">💰 Transaction History</h3><div id="historyList" style="font-size:12px;color:#ccc"></div><button onclick="document.getElementById('historyModal').style.display='none'" style="width:100%;margin-top:10px;padding:10px;background:#ffcc00;border:none;border-radius:10px;font-weight:bold">Close</button></div></div>
-<div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:10000;justify-content:center;align-items:center;padding:15px">
-<div style="background:#1e2a35;padding:20px;border-radius:18px;width:100%;max-width:360px;text-align:center;border:1px solid #ffcc00">
-<h2 style="color:#00ff88;margin-bottom:10px">💰 Add Money</h2>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=rajcode@ybl&pn=RajCode&am=100&cu=INR" style="width:210px;margin:10px auto;background:#fff;padding:10px;border-radius:12px;display:block">
-<p style="color:#fff;margin:8px 0;font-size:15px">UPI ID: <b style="color:#ffcc00">rajcode@ybl</b></p>
-<input id="depAmount" type="number" placeholder="Amount (e.g. 100)" style="width:100%;padding:12px;background:#000;border:1px solid #333;color:#fff;border-radius:8px;margin:6px 0">
-<input id="depUtr" type="text" placeholder="UTR / Transaction ID (12 digit)" style="width:100%;padding:12px;background:#000;border:1px solid #333;color:#fff;border-radius:8px;margin:6px 0">
-<input id="depScreenshot" type="file" accept="image/*" style="width:100%;padding:8px;color:#fff">
-<button onclick="submitDeposit()" style="width:100%;padding:13px;background:#00ff88;border:none;border-radius:10px;font-weight:bold;margin-top:10px;color:#000">Submit Request</button>
-<button onclick="document.getElementById('depositModal').style.display='none'" style="width:100%;padding:11px;background:#2a3a4a;color:#fff;border:none;border-radius:10px;margin-top:8px">Cancel</button>
-</div>
-</div>
-<div id="bonusModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#1a1a2e; border:2px solid #ffcc00; border-radius:15px; padding:20px; text-align:center; width:85%; max-width:300px;">
-    <h3 style="color:#ffcc00; margin:0 0 10px 0;">🎁 DAILY BONUS</h3>
-    <p style="color:#fff; font-size:14px;">Aaj ka bonus jeeto ₹2 se ₹50 tak!</p>
-    <h2 id="bonusAmount" style="color:#00ff88; font-size:28px; margin:10px 0;">₹0</h2>
-    <button onclick="claimBonus()" style="background:linear-gradient(90deg,#ffcc00,#ff9900); border:none; padding:10px 25px; border-radius:20px; font-weight:900; width:100%;">CLAIM NOW</button>
-    <p onclick="document.getElementById('bonusModal').style.display='none'" style="color:#888; font-size:12px; margin-top:12px; cursor:pointer;">Close</p>
-  </div>
-</div>
-
-<script>
-let bal=parseInt(localStorage.getItem('wallet')||'1000');
-document.getElementById('walletBalance').innerText=bal;
-function openDeposit(){document.getElementById('depositModal').style.display='flex';}
-function playGame(){
-if(bal<10){alert('Paisa Add karo');openDeposit();return;}
-document.getElementById('coin').style.transform='rotateY(720deg) translateY(-30px)';
-try{document.getElementById('coinSound').play();}catch(e){}
-document.getElementById('resultText').innerText='Tossing...';
-setTimeout(()=>{
-bal-=10;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;
-let win=Math.random()>0.5;
-document.getElementById('coin').style.transform='rotateY(0deg)';
-document.getElementById('coin').innerText=win?'👑':'🪙';
-document.getElementById('resultText').innerText=win?'🎉 YOU WON ₹18!':'😢 LOST - Try Again';
-if(win){bal+=18;localStorage.setItem('wallet',bal);document.getElementById('walletBalance').innerText=bal;}
-},900);
-}
-function submitDeposit(){const a=document.getElementById('depAmount').value;const u=document.getElementById('depUtr').value;const f=document.getElementById('depScreenshot');if(!a||!u){alert('Amount aur UTR bharo');return;}if(f.files[0]){const r=new FileReader();r.onload=function(e){saveDep(a,u,e.target.result)};r.readAsDataURL(f.files[0]);}else{saveDep(a,u,'');}}
-function saveDep(amount,utr,ss){let d=JSON.parse(localStorage.getItem('raj_deposits')||'[]');d.push({amount,utr,screenshot:ss,user:localStorage.getItem('username')||'Guest',time:new Date().toLocaleString(),status:'pending'});localStorage.setItem('raj_deposits',JSON.stringify(d));alert('✅ Request Sent!');document.getElementById('depositModal').style.display='none';}
-function showTeam(){
-  document.querySelector('.box.card').style.display='none';
-  document.getElementById('teamSection').style.display='block';
-}
-function showGame(){
-  document.querySelector('.box.card').style.display='block';
-  document.getElementById('teamSection').style.display='none';
-}
-function openWithdraw(){
- let u=prompt("UPI ID daalo:");
- let a=prompt("Amount Min 100:");
- if(u && a>=100){alert("Success! ₹"+a+" 24hr me "+u+" pe ayega");}else{alert("Min 100 chahiye");}
-}
-function openHistory(){let h=JSON.parse(localStorage.getItem('raj_deposits')||'[]');let list=document.getElementById('historyList');if(h.length==0){list.innerHTML='No transaction yet';}else{list.innerHTML=h.map(x=>`<div style="border-bottom:1px solid #333;padding:6px 0">₹${x.amount} - ${x.utr}</div>`).join('');}document.getElementById('historyModal').style.display='block';}
-function spinBonus(){let l=localStorage.getItem('lastSpin');if(l===new Date().toDateString()){alert("Aaj ka bonus le liya! Kal aana");return;}let b=document.getElementById('bonusModal');if(b)b.style.display='flex';else{let w=[2,5,10,20,50][Math.floor(Math.random()*5)];let bal=parseInt(localStorage.getItem('wallet')||1000)+w;localStorage.setItem('wallet',bal);localStorage.setItem('lastSpin',new Date().toDateString());document.getElementById('walletBalance').innerText=bal;alert("🎉 Daily Bonus ₹"+w+" Added!");}}
-function openBonus(){
-  document.getElementById('bonusModal').style.display='flex';
-  let amt = Math.floor(Math.random()*48)+2;
-  document.getElementById('bonusAmount').innerText = '₹'+amt;
-  window._bonusAmt = amt;
-}
-function claimBonus(){
-  let old = parseInt(localStorage.getItem('wallet')||'0');
-  localStorage.setItem('wallet', old + window._bonusAmt);
-  alert('₹'+window._bonusAmt+' Wallet me add ho gaya!');
-  document.getElementById('bonusModal').style.display='none';
-  location.reload();
-}
-</script>
-</body>
-</html>
+<!-- MODALS - SAME OLD -->
+<div id="historyModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999"><div style="background:#1a1a1a;margin:20% auto;padding:15px;border-radius:15px;width:90%;max-width:400px"><h3 style="color:#ffcc00">💰 History</h3><div id="historyList" style="font-size:12px;color:#ccc"></div><button onclick="document.getElementById('historyModal').style.display='none'" style="width:100%;margin-top:10px;padding:10px;background:#ffcc00;border:none;border-radius:10px;font-weight:bold">Close</button></div></div>
+<div id="depositModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:10000;justify-content:center;align-items:center;padding:15px"><div style="background:#1e2a35;padding:20px;border-radius:18px;width:100%;max-width:360px;text-align:center;border:1px solid #ffcc00"><h2 style="color:#00ff88">💰 Add Money</h2><input id="depAmount" type="number" placeholder="Amount" style="width:100%;padding:12px;background:#000;border:1px solid #333;color:#fff;border-radius:8px;margin:6px 0"><input id="depUtr" type="text" placeholder="UTR" style="width:100%;padding:12px;background:#000;border:1px solid
